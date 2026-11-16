@@ -241,8 +241,11 @@ export function ConsoleView() {
 
       <div className="shrink-0 border-t border-line/80 bg-panel/40 px-3 pb-3 pt-2.5">
         <div className="flex items-end gap-2 rounded-[10px] border border-line bg-app px-3 py-2 transition focus-within:border-accent/45 focus-within:shadow-[0_0_0_3px_rgb(var(--accent)/0.09)]">
-          <span className="mb-[3px] shrink-0 mono text-[12px] text-accent">❯</span>
-          <textarea
+          <div className="flex min-w-0 flex-1 items-start gap-2">
+            <span className="flex h-[30px] shrink-0 items-center mono text-[12px] leading-5 text-accent">
+              ❯
+            </span>
+            <textarea
             ref={inputRef}
             rows={1}
             value={input}
@@ -272,9 +275,10 @@ export function ConsoleView() {
             }}
             placeholder="输入 Redis 命令，Enter 执行，Shift+Enter 换行，↑↓ 浏览历史"
             spellCheck={false}
-            className="mono max-h-[96px] min-h-[22px] flex-1 resize-none border-0 bg-transparent p-0 text-[12px] leading-[1.6] text-ink outline-none placeholder:text-faint"
+            className="mono max-h-[96px] min-h-[30px] flex-1 resize-none border-0 bg-transparent px-0 py-[5px] text-[12px] leading-5 text-ink outline-none placeholder:text-faint"
           />
-          <div className="mb-[1px] flex shrink-0 items-center gap-1.5">
+          </div>
+          <div className="mb-[2px] flex shrink-0 items-center gap-1.5">
             {runningCount > 0 ? (
               <span className="flex items-center gap-1 text-[10px] text-muted">
                 <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-amber" /> 执行中
