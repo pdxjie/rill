@@ -179,6 +179,9 @@ pub struct NamespaceTreeResult {
     pub scanned: u64,
     pub root_keys: u64,
     pub truncated: bool,
+    pub cursor: u64,
+    pub done: bool,
+    pub total_keys: u64,
 }
 
 #[derive(Debug, Serialize)]

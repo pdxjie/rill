@@ -243,9 +243,18 @@ pub async fn namespace_tree(
     id: String,
     pattern: Option<String>,
     max_keys: Option<u64>,
+    cursor: Option<u64>,
+    budget_ms: Option<u64>,
 ) -> Result<NamespaceTreeResult, String> {
     let session = session_of(&state, &id)?;
-    keys::namespace_tree(&session, pattern, max_keys.unwrap_or(500_000)).await
+    keys::namespace_tree(
+        &session,
+        pattern,
+        max_keys.unwrap_or(100_000),
+        cursor.unwrap_or(0),
+        budget_ms.unwrap_or(2000),
+    )
+    .await
 }
 
 #[tauri::command]

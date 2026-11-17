@@ -143,6 +143,9 @@ export interface NamespaceTreeResult {
   scanned: number
   rootKeys: number
   truncated: boolean
+  cursor: number
+  done: boolean
+  totalKeys: number
 }
 
 export interface KeyDetail {

@@ -195,6 +195,8 @@ pub async fn namespace_tree(
     session: &Session,
     pattern: Option<String>,
     max_keys: u64,
+    start_cursor: u64,
+    budget_ms: u64,
 ) -> Result<NamespaceTreeResult, String> {
     use std::time::Instant;
 
@@ -203,9 +205,15 @@ pub async fn namespace_tree(
         .map(|value| value.trim().to_string())
         .filter(|value| !value.is_empty() && value != "*");
     let max_keys = max_keys.clamp(10_000, 2_000_000);
-    let deadline = Instant::now() + Duration::from_secs(8);
+    let budget = Duration::from_millis(budget_ms.clamp(500, 15_000));
+    let deadline = Instant::now() + budget;
 
-    let mut cursor: u64 = 0;
+    let mut size_conn = session.conn.clone();
+    let total_keys: u64 = q(&mut size_conn, redis::cmd("DBSIZE"))
+        .await
+        .unwrap_or(0);
+
+    let mut cursor: u64 = start_cursor;
     let mut scanned: u64 = 0;
     let mut root_keys: u64 = 0;
     let mut counts: std::collections::HashMap<String, u64> = std::collections::HashMap::new();
@@ -273,17 +281,21 @@ pub async fn namespace_tree(
         .collect();
     entries.sort_by(|a, b| a.path.cmp(&b.path));
 
-    let mut truncated = cursor != 0 || scanned >= max_keys || Instant::now() >= deadline;
+    let mut truncated = false;
     if entries.len() > 8000 {
         entries.truncate(8000);
         truncated = true;
     }
+    let done = cursor == 0;
 
     Ok(NamespaceTreeResult {
         entries,
         scanned,
         root_keys,
         truncated,
+        cursor,
+        done,
+        total_keys,
     })
 }
 

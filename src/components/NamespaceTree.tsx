@@ -51,6 +51,11 @@ export function NamespaceTree({
   scopeKey,
   refreshToken,
   activeKey,
+  scanning,
+  progress,
+  filtered,
+  onScanAll,
+  onStopScan,
   onRetry,
   onFilter,
   onSelectKey,
@@ -62,6 +67,11 @@ export function NamespaceTree({
   scopeKey: string
   refreshToken: number
   activeKey: string | null
+  scanning: boolean
+  progress: { scanned: number; total: number }
+  filtered: boolean
+  onScanAll: () => void
+  onStopScan: () => void
   onRetry: () => void
   onFilter: (prefix: string) => void
   onSelectKey: (key: string) => void
@@ -253,10 +263,17 @@ export function NamespaceTree({
         <div className="flex items-center gap-1.5">
           <Layers size={12} className="text-accent" />
           <span className="text-[11px] font-semibold text-ink">命名空间</span>
-          <span className="text-[9.5px] text-faint">
-            {formatInt(data.scanned)} 个 Key · {formatInt(data.entries.length)} 个节点
+          <span className="text-[9px] tabular-nums text-faint">
+            {formatInt(data.entries.length)} 节点
           </span>
-          {loading ? <RefreshCw size={10} className="animate-spin text-faint" /> : null}
+          {data.done ? (
+            <span className="rounded-[3px] bg-green/10 px-1 text-[8.5px] text-green">完整</span>
+          ) : (
+            <span className="rounded-[3px] bg-amber/10 px-1 text-[8.5px] text-amber">部分</span>
+          )}
+          {loading || scanning ? (
+            <RefreshCw size={10} className="animate-spin text-faint" />
+          ) : null}
           <IconButton
             icon={RefreshCw}
             label="重新扫描命名空间"
@@ -264,15 +281,73 @@ export function NamespaceTree({
             onClick={onRetry}
           />
         </div>
-        <p className="mt-0.5 text-[9.5px] leading-relaxed text-faint">
-          基于当前筛选条件的 SCAN 聚合，统计全部类型；展开文件夹会加载该层 Key，选中 Key
-          在右侧查看、编辑或删除。
+
+        <div className="mt-1 flex items-center gap-2">
+          <span className="min-w-0 flex-1 truncate text-[9.5px] tabular-nums text-muted">
+            {filtered ? (
+              <>已扫描 {formatInt(progress.scanned || data.scanned)} 个匹配 Key</>
+            ) : (
+              <>
+                已扫描 {formatInt(progress.scanned || data.scanned)} /{' '}
+                {formatInt(progress.total || data.totalKeys)}
+                {progress.total > 0 ? (
+                  <span className="text-faint">{' · '}
+                    {Math.min(100, ((progress.scanned || data.scanned) / progress.total) * 100) < 0.1 &&
+                    (progress.scanned || data.scanned) > 0
+                      ? '<0.1%'
+                      : `${Math.min(100, ((progress.scanned || data.scanned) / progress.total) * 100).toFixed(1)}%`}
+                  </span>
+                ) : null}
+              </>
+            )}
+          </span>
+          {!data.done ? (
+            scanning ? (
+              <button
+                onClick={onStopScan}
+                className="shrink-0 rounded-[5px] border border-line bg-panel px-1.5 py-[2px] text-[9px] text-muted transition hover:bg-elevated hover:text-ink"
+              >
+                停止
+              </button>
+            ) : (
+              <button
+                onClick={onScanAll}
+                className="shrink-0 rounded-[5px] border border-accent/30 bg-accent/10 px-1.5 py-[2px] text-[9px] font-medium text-accent transition hover:bg-accent/15"
+              >
+                扫描完整
+              </button>
+            )
+          ) : null}
+        </div>
+
+        {!data.done && !filtered ? (
+          <div className="mt-1 h-[3px] overflow-hidden rounded-full bg-line/60">
+            <div
+              className="h-full rounded-full bg-accent/70 transition-[width] duration-500"
+              style={{
+                width: filtered
+                  ? '100%'
+                  : `${Math.min(100, Math.max(2, ((progress.scanned || data.scanned) / Math.max(1, progress.total || data.totalKeys)) * 100))}%`,
+              }}
+            />
+          </div>
+        ) : null}
+
+        <p className="mt-1 text-[9px] leading-relaxed text-faint">
+          基于当前筛选条件的 SCAN 聚合；展开文件夹加载直属 Key，选中 Key 在右侧查看、编辑或删除。
           {data.rootKeys > 0 ? ` 另有 ${formatInt(data.rootKeys)} 个根级 Key。` : ''}
         </p>
+        {!data.done ? (
+          <div className="mt-1 text-[9px] leading-relaxed text-amber/90">
+            {scanning
+              ? '正在后台分批扫描剩余 Key，计数会随进度增长；期间可继续浏览已加载的命名空间。'
+              : '当前只是部分结果。点「扫描完整」继续扫描，或输入更具体的前缀缩小范围。'}
+          </div>
+        ) : null}
         {data.truncated ? (
           <div className="mt-1.5 flex items-start gap-1.5 rounded-[6px] border border-amber/20 bg-amber/5 px-2 py-1 text-[9.5px] leading-relaxed text-amber">
             <AlertTriangle size={10} className="mt-[1px] shrink-0" />
-            数据量较大，本次只完成了部分扫描。输入更具体的前缀后重新扫描，或使用列表筛选。
+            节点数量超过 8000，树中只展示前 8000 个命名空间；可输入更具体的前缀缩小范围。
           </div>
         ) : null}
         {error ? <div className="mt-1.5 text-[9.5px] text-red">{error}</div> : null}

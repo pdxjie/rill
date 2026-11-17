@@ -60,11 +60,21 @@ export function KeysView() {
   const [createOpen, setCreateOpen] = useState(false)
   const [tree, setTree] = useState<NamespaceTreeResult | null>(null)
   const [treeLoading, setTreeLoading] = useState(false)
+  const [treeScanning, setTreeScanning] = useState(false)
   const [treeError, setTreeError] = useState<string | null>(null)
   const [treeVersion, setTreeVersion] = useState(0)
+  const [treeProgress, setTreeProgress] = useState({ scanned: 0, total: 0 })
 
   const requestId = useRef(0)
-  const treeRequestId = useRef(0)
+  const treeRunRef = useRef(0)
+  const treeAccumulator = useRef(
+    new Map<string, { name: string; depth: number; count: number; direct: number }>(),
+  )
+  const treeScannedRef = useRef(0)
+  const treeRootRef = useRef(0)
+  const treeTotalRef = useRef(0)
+  const treeCursorRef = useRef(0)
+  const treeDoneRef = useRef(false)
   const listRef = useRef<HTMLDivElement>(null)
   const searchRef = useRef<HTMLInputElement>(null)
   const scopeKey = `${conn?.id ?? ''}|${conn?.db ?? 0}|${typeFilter}`
@@ -127,25 +137,120 @@ export function KeysView() {
     void loadFirst()
   }, [loadFirst, scopeKey])
 
+  const resetTreeScan = useCallback(() => {
+    treeAccumulator.current.clear()
+    treeScannedRef.current = 0
+    treeRootRef.current = 0
+    treeTotalRef.current = 0
+    treeCursorRef.current = 0
+    treeDoneRef.current = false
+    setTreeProgress({ scanned: 0, total: 0 })
+  }, [])
+
+  const mergeTreeChunk = useCallback((result: NamespaceTreeResult) => {
+    for (const entry of result.entries) {
+      const existing = treeAccumulator.current.get(entry.path)
+      if (existing) {
+        existing.count += entry.count
+        existing.direct += entry.direct
+      } else {
+        treeAccumulator.current.set(entry.path, {
+          name: entry.name,
+          depth: entry.depth,
+          count: entry.count,
+          direct: entry.direct,
+        })
+      }
+    }
+    treeScannedRef.current += result.scanned
+    treeRootRef.current += result.rootKeys
+    treeTotalRef.current = result.totalKeys
+    treeCursorRef.current = result.cursor
+    treeDoneRef.current = result.done
+    setTreeProgress({ scanned: treeScannedRef.current, total: result.totalKeys })
+  }, [])
+
+  const snapshotTree = useCallback((): NamespaceTreeResult => {
+    const entries = [...treeAccumulator.current.entries()]
+      .map(([path, value]) => ({
+        path,
+        name: value.name,
+        depth: value.depth,
+        count: value.count,
+        direct: value.direct,
+      }))
+      .sort((a, b) => a.path.localeCompare(b.path))
+    return {
+      entries: entries.slice(0, 8000),
+      scanned: treeScannedRef.current,
+      rootKeys: treeRootRef.current,
+      truncated: entries.length > 8000,
+      cursor: treeCursorRef.current,
+      done: treeDoneRef.current,
+      totalKeys: treeTotalRef.current,
+    }
+  }, [])
+
   const loadTree = useCallback(async () => {
     if (!conn) return
-    const token = ++treeRequestId.current
+    const run = ++treeRunRef.current
+    resetTreeScan()
+    setTree(null)
     setTreeLoading(true)
+    setTreeScanning(false)
     setTreeError(null)
     try {
       const result = await api.namespaceTree(
         conn.id,
         pattern === '*' ? undefined : pattern,
-        500_000,
+        100_000,
+        0,
+        2_000,
       )
-      if (token !== treeRequestId.current) return
-      setTree(result)
+      if (run !== treeRunRef.current) return
+      mergeTreeChunk(result)
+      setTree(snapshotTree())
     } catch (err) {
-      if (token === treeRequestId.current) setTreeError(errorMessage(err))
+      if (run === treeRunRef.current) setTreeError(errorMessage(err))
     } finally {
-      if (token === treeRequestId.current) setTreeLoading(false)
+      if (run === treeRunRef.current) setTreeLoading(false)
     }
-  }, [conn?.id, conn?.db, pattern])
+  }, [conn?.id, conn?.db, pattern, resetTreeScan, mergeTreeChunk, snapshotTree])
+
+  const scanAllTree = useCallback(async () => {
+    if (!conn || treeDoneRef.current) return
+    const run = ++treeRunRef.current
+    setTreeScanning(true)
+    setTreeError(null)
+    try {
+      while (!treeDoneRef.current) {
+        const result = await api.namespaceTree(
+          conn.id,
+          pattern === '*' ? undefined : pattern,
+          100_000,
+          treeCursorRef.current,
+          2_000,
+        )
+        if (run !== treeRunRef.current) return
+        mergeTreeChunk(result)
+      }
+      setTree(snapshotTree())
+    } catch (err) {
+      if (run === treeRunRef.current) setTreeError(errorMessage(err))
+    } finally {
+      if (run === treeRunRef.current) setTreeScanning(false)
+    }
+  }, [conn?.id, conn?.db, pattern, mergeTreeChunk, snapshotTree])
+
+  const stopTreeScan = useCallback(() => {
+    treeRunRef.current += 1
+    setTreeScanning(false)
+    setTree(snapshotTree())
+  }, [snapshotTree])
+
+  useEffect(() => () => {
+    treeRunRef.current += 1
+  }, [])
 
   useEffect(() => {
     if (mode === 'tree') void loadTree()
@@ -355,6 +460,11 @@ export function KeysView() {
               scopeKey={`${conn?.id ?? ''}:${conn?.db ?? 0}:${pattern}`}
               refreshToken={treeVersion}
               activeKey={activeKey}
+              scanning={treeScanning}
+              progress={treeProgress}
+              filtered={pattern !== '*'}
+              onScanAll={() => void scanAllTree()}
+              onStopScan={stopTreeScan}
               onRetry={() => void loadTree()}
               onSelectKey={(key) => setActiveKey(key)}
               loadKeys={loadTreeKeys}

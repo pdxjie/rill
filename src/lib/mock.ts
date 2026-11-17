@@ -1043,19 +1043,24 @@ export const mockApi = {
   async namespaceTree(
     _id: string,
     pattern?: string,
-    _maxKeys = 500_000,
+    _maxKeys = 100_000,
+    cursor = 0,
+    _budgetMs = 2000,
   ): Promise<NamespaceTreeResult> {
-    await sleep(120)
+    await sleep(60)
     const matcher = globToRegex(pattern && pattern !== '*' ? pattern : '*')
-    const entries = [...keys.entries()]
-    const selected = entries
+    const selected = [...keys.entries()]
       .filter((_, index) => mockCurrentDb === 0 || index % 16 === mockCurrentDb)
       .map(([key]) => key)
       .filter((key) => matcher.test(key))
+    const chunkSize = 220
+    const start = Math.max(0, cursor)
+    const slice = selected.slice(start, start + chunkSize)
+    const next = start + slice.length
     const counts = new Map<string, number>()
     const directCounts = new Map<string, number>()
     let rootKeys = 0
-    for (const key of selected) {
+    for (const key of slice) {
       let hasPrefix = false
       let lastSeparator = -1
       for (let index = 1; index < key.length - 1; index++) {
@@ -1085,9 +1090,12 @@ export const mockApi = {
           direct: directCounts.get(path) ?? 0,
         }))
         .sort((a, b) => a.path.localeCompare(b.path)),
-      scanned: selected.length,
+      scanned: slice.length,
       rootKeys,
       truncated: false,
+      cursor: next >= selected.length ? 0 : next,
+      done: next >= selected.length,
+      totalKeys: selected.length,
     }
   },
 

@@ -267,10 +267,12 @@ mod tests {
         let analysis = keys::analyze(&session, 500).await.expect("analyze");
         assert!(analysis.scanned >= 1);
 
-        let tree = keys::namespace_tree(&session, None, 100_000)
+        let tree = keys::namespace_tree(&session, None, 100_000, 0, 2_000)
             .await
             .expect("namespace tree");
         assert!(tree.scanned >= 1);
+        assert!(tree.done, "small test DB must finish in one chunk");
+        assert!(tree.total_keys >= tree.scanned);
         assert!(tree.entries.iter().any(|entry| entry.path == "rill"));
         assert!(tree.entries.iter().any(|entry| entry.path.starts_with("rill:it")));
 
@@ -290,7 +292,7 @@ mod tests {
                 .await
                 .expect("mixed key");
         }
-        let mixed_tree = keys::namespace_tree(&session, None, 100_000)
+        let mixed_tree = keys::namespace_tree(&session, None, 100_000, 0, 2_000)
             .await
             .expect("mixed tree");
         let node = mixed_tree

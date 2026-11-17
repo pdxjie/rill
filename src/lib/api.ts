@@ -58,6 +58,8 @@ export interface RillApi {
     id: string,
     pattern?: string,
     maxKeys?: number,
+    cursor?: number,
+    budgetMs?: number,
   ): Promise<NamespaceTreeResult>
   prefixKeys(
     id: string,
@@ -110,8 +112,8 @@ const real: RillApi = {
   overview: (id) => invoke('overview', { id }),
   scanKeys: (id, cursor, pattern, typeFilter, count) =>
     invoke('scan_keys', { id, cursor, pattern, typeFilter, count }),
-  namespaceTree: (id, pattern, maxKeys) =>
-    invoke('namespace_tree', { id, pattern, maxKeys }),
+  namespaceTree: (id, pattern, maxKeys, cursor, budgetMs) =>
+    invoke('namespace_tree', { id, pattern, maxKeys, cursor, budgetMs }),
   prefixKeys: (id, prefix, cursor, count) =>
     invoke('prefix_keys', { id, prefix, cursor, count }),
   keyDetail: (id, key, count) => invoke('key_detail', { id, key, count }),
