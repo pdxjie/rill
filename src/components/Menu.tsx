@@ -74,7 +74,7 @@ export function ContextMenu({
               onClose()
             }}
             className={cn(
-              'flex h-[28px] w-full items-center gap-2 rounded-[6px] px-2 text-left text-[11.5px] transition disabled:opacity-40',
+              'flex h-[28px] w-full items-center gap-2 rounded-[6px] px-2 text-left text-[12.5px] transition disabled:opacity-40',
               item.danger
                 ? 'text-red hover:bg-red/10'
                 : 'text-muted hover:bg-panel2 hover:text-ink',

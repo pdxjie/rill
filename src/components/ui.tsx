@@ -177,7 +177,7 @@ export function Tip({
         ? createPortal(
             <span
               ref={bubbleRef}
-              className="pointer-events-none fixed z-[200] whitespace-nowrap rounded-md border border-line bg-elevated px-1.5 py-0.5 text-[10.5px] font-medium text-ink shadow-pop"
+              className="pointer-events-none fixed z-[200] whitespace-nowrap rounded-md border border-line bg-elevated px-1.5 py-0.5 text-[12px] font-medium text-ink shadow-pop"
               style={{
                 left: position.left,
                 top: position.top,
@@ -355,7 +355,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 rounded-[5px] px-1.5 py-[1px] text-[10px] font-semibold uppercase tracking-[0.04em]',
+        'inline-flex items-center gap-1 rounded-[5px] px-1.5 py-[1px] text-[12px] font-semibold uppercase tracking-[0.04em]',
         !color && 'bg-elevated text-muted',
         tone === 'outline' && 'border bg-transparent',
         className,

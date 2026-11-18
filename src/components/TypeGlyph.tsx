@@ -53,7 +53,7 @@ export function TypeBadge({ type }: { type: RedisType | string }) {
   const meta = typeMeta(type)
   return (
     <span
-      className="inline-flex items-center gap-1 rounded-[5px] px-1.5 py-[1px] text-[10px] font-semibold"
+      className="inline-flex items-center gap-1 rounded-[5px] px-1.5 py-[1px] text-[12px] font-semibold"
       style={{ background: `${meta.color}16`, color: meta.color }}
     >
       <span className="h-1 w-1 rounded-full" style={{ background: meta.color }} />

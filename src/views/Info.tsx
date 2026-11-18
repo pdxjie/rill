@@ -98,8 +98,8 @@ export function InfoView() {
       <aside className="flex w-[204px] shrink-0 flex-col border-r border-line/70 bg-panel/20">
         <div className="flex h-[40px] items-center gap-1.5 border-b border-line/70 px-3">
           <Server size={12} className="text-accent" />
-          <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">INFO</span>
-          <span className="ml-auto text-[9px] text-faint">{sections.length} sections</span>
+          <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">INFO</span>
+          <span className="ml-auto text-[11.5px] text-faint">{sections.length} sections</span>
         </div>
         <div className="scroll-area flex-1 py-1.5">
           {sections.map((item) => (
@@ -111,7 +111,7 @@ export function InfoView() {
                 setQuery('')
               }}
               className={cn(
-                'flex h-[30px] w-full items-center gap-2 px-3 text-left text-[11.5px] transition',
+                'flex h-[30px] w-full items-center gap-2 px-3 text-left text-[12.5px] transition',
                 view === 'info' && active === item.name
                   ? 'bg-elevated text-ink'
                   : 'text-muted hover:bg-panel2/60 hover:text-ink',
@@ -123,20 +123,20 @@ export function InfoView() {
                 <span className="h-1 w-1 rounded-full bg-line" />
               )}
               <span className="flex-1 truncate">{item.name}</span>
-              <span className="text-[9px] tabular-nums text-faint">{item.items.length}</span>
+              <span className="text-[11.5px] tabular-nums text-faint">{item.items.length}</span>
             </button>
           ))}
           <div className="mx-3 my-1.5 h-px bg-line/70" />
           <button
             onClick={() => setView('clients')}
             className={cn(
-              'flex h-[30px] w-full items-center gap-2 px-3 text-left text-[11.5px] transition',
+              'flex h-[30px] w-full items-center gap-2 px-3 text-left text-[12.5px] transition',
               view === 'clients' ? 'bg-elevated text-ink' : 'text-muted hover:bg-panel2/60 hover:text-ink',
             )}
           >
             <Users size={11} className={view === 'clients' ? 'text-accent' : 'text-faint'} />
             <span className="flex-1">客户端连接</span>
-            <span className="text-[9px] tabular-nums text-faint">{clients?.length ?? '·'}</span>
+            <span className="text-[11.5px] tabular-nums text-faint">{clients?.length ?? '·'}</span>
           </button>
         </div>
         <div className="border-t border-line/70 p-2">
@@ -158,7 +158,7 @@ export function InfoView() {
             <h1 className="text-sm font-semibold text-ink">
               {view === 'clients' ? '客户端连接' : active}
             </h1>
-            <p className="mono text-[9.5px] text-faint">
+            <p className="mono text-[11.5px] text-faint">
               {overview
                 ? `Redis ${overview.version} · ${formatUptime(overview.uptimeSecs)} · ${formatBytes(overview.usedMemory)}`
                 : '读取中…'}
@@ -178,7 +178,7 @@ export function InfoView() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="筛选字段"
-                className="h-[26px] w-[160px] rounded-[6px] border border-line bg-panel pl-6 pr-2 text-[10.5px] outline-none placeholder:text-faint focus:border-accent/50"
+                className="h-[26px] w-[160px] rounded-[6px] border border-line bg-panel pl-6 pr-2 text-[12px] outline-none placeholder:text-faint focus:border-accent/50"
               />
             </div>
             <CopyAllButton
@@ -222,21 +222,21 @@ export function InfoView() {
                 <div className="flex flex-wrap gap-2 px-4 py-3">
                   {section.items.map((item) => (
                     <div key={item.key} className="rounded-[10px] border border-line bg-panel px-3 py-2">
-                      <div className="flex items-center gap-1.5 text-[10px] font-medium text-ink">
+                      <div className="flex items-center gap-1.5 text-[12px] font-medium text-ink">
                         <Database size={10} className="text-accent" /> {item.key}
                       </div>
-                      <div className="mt-1 mono text-[10px] text-faint">{item.value}</div>
+                      <div className="mt-1 mono text-[12px] text-faint">{item.value}</div>
                     </div>
                   ))}
                 </div>
               ) : null}
-              <table className="w-full table-fixed border-collapse text-[11px]">
+              <table className="w-full table-fixed border-collapse text-[12.5px]">
                 <tbody>
                   {filtered.map((item) => (
                     <tr key={item.key} className="group border-b border-line/40 hover:bg-elevated/30">
-                      <td className="w-[240px] px-4 py-1.5 align-top mono text-[10.5px] text-muted">{item.key}</td>
+                      <td className="w-[240px] px-4 py-1.5 align-top mono text-[12px] text-muted">{item.key}</td>
                       <td className="px-3 py-1.5 align-top">
-                        <span className="mono whitespace-pre-wrap break-all text-[10.5px] text-ink">{item.value || '—'}</span>
+                        <span className="mono whitespace-pre-wrap break-all text-[12px] text-ink">{item.value || '—'}</span>
                       </td>
                       <td className="w-8 px-2 align-middle">
                         <button
@@ -253,11 +253,11 @@ export function InfoView() {
                 </tbody>
               </table>
               {filtered.length === 0 ? (
-                <p className="py-10 text-center text-[11px] text-faint">
+                <p className="py-10 text-center text-[12.5px] text-faint">
                   {query ? `没有匹配“${query}”的字段` : '该 section 没有内容'}
                 </p>
               ) : null}
-              <div className="flex items-center gap-1.5 px-4 py-3 text-[9.5px] text-faint">
+              <div className="flex items-center gap-1.5 px-4 py-3 text-[11.5px] text-faint">
                 <HardDrive size={9} /> 数据来自 INFO 命令 · {section?.items.length ?? 0} 个字段 · 只读
               </div>
             </div>
@@ -303,7 +303,7 @@ function ClientsTable({ rows, loading }: { rows: ClientRow[] | null; loading: bo
   }
   return (
     <div>
-      <div className="sticky top-0 z-[1] grid grid-cols-[52px_1fr_110px_70px_60px_44px_120px_78px] gap-2 border-b border-line/70 bg-panel2/95 px-4 py-2 text-[9px] font-medium uppercase tracking-wider text-faint backdrop-blur">
+      <div className="sticky top-0 z-[1] grid grid-cols-[52px_1fr_110px_70px_60px_44px_120px_78px] gap-2 border-b border-line/70 bg-panel2/95 px-4 py-2 text-[11.5px] font-medium uppercase tracking-wider text-faint backdrop-blur">
         <span>ID</span>
         <span>地址</span>
         <span>名称</span>
@@ -316,7 +316,7 @@ function ClientsTable({ rows, loading }: { rows: ClientRow[] | null; loading: bo
       {rows.map((row) => (
         <div
           key={row.id}
-          className="grid grid-cols-[52px_1fr_110px_70px_60px_44px_120px_78px] items-center gap-2 border-b border-line/40 px-4 py-1.5 text-[10px] hover:bg-elevated/30"
+          className="grid grid-cols-[52px_1fr_110px_70px_60px_44px_120px_78px] items-center gap-2 border-b border-line/40 px-4 py-1.5 text-[12px] hover:bg-elevated/30"
         >
           <span className="mono tabular-nums text-faint">#{row.id}</span>
           <span className="truncate mono text-ink" title={row.addr}>
@@ -326,11 +326,11 @@ function ClientsTable({ rows, loading }: { rows: ClientRow[] | null; loading: bo
           <span className="truncate tabular-nums text-muted" title={`${row.age}s`}>{formatUptime(row.age)}</span>
           <span className="tabular-nums text-muted">{row.idle}s</span>
           <span className="tabular-nums text-faint">{row.db}</span>
-          <span className="truncate mono text-[9.5px] text-accent/80">{row.cmd}</span>
+          <span className="truncate mono text-[11.5px] text-accent/80">{row.cmd}</span>
           <span className="truncate text-faint">{row.user}</span>
         </div>
       ))}
-      <p className="px-4 py-3 text-[9.5px] text-faint">共 {rows.length} 个连接 · CLIENT LIST</p>
+      <p className="px-4 py-3 text-[11.5px] text-faint">共 {rows.length} 个连接 · CLIENT LIST</p>
     </div>
   )
 }

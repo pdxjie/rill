@@ -12,8 +12,8 @@
   --line: 33 37 45;
   --line-strong: 48 54 64;
   --ink: 232 235 240;
-  --muted: 141 149 163;
-  --faint: 93 101 114;
+  --muted: 160 168 182;
+  --faint: 120 128 142;
   --accent: 255 107 87;
   --accent2: 255 158 122;
   --green: 74 222 128;
@@ -36,8 +36,8 @@
   --line: 228 223 214;
   --line-strong: 206 200 189;
   --ink: 30 29 26;
-  --muted: 105 101 94;
-  --faint: 148 142 132;
+  --muted: 92 88 82;
+  --faint: 118 112 102;
   --accent: 219 74 56;
   --accent2: 240 120 88;
   --green: 22 163 74;
@@ -62,8 +62,12 @@ body,
 }
 
 html {
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  /* Let macOS use its native text rasterisation; forcing grayscale AA
+     makes 9-10px UI text look washed out. */
+  -webkit-font-smoothing: auto;
+  text-rendering: auto;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -75,7 +79,8 @@ body {
     'PingFang SC', sans-serif;
   font-size: 13px;
   line-height: 1.5;
-  letter-spacing: 0.005em;
+  letter-spacing: 0;
+  font-optical-sizing: auto;
   user-select: none;
   cursor: default;
 }
@@ -171,7 +176,7 @@ select:focus-visible {
     @apply rounded-[12px] border border-line/80 bg-panel;
   }
   .kbd {
-    @apply inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-[5px] border border-line bg-elevated px-1 text-[10px] font-medium text-muted;
+    @apply inline-flex h-[19px] min-w-[19px] items-center justify-center rounded-[5px] border border-line bg-elevated px-1 text-[11.5px] font-medium text-muted;
     box-shadow: 0 1px 0 rgb(var(--line-strong) / 0.6);
   }
   .chip {
@@ -228,7 +233,7 @@ select:focus-visible {
 
 .value-pre {
   font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.65;
   tab-size: 2;
   white-space: pre-wrap;

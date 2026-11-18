@@ -204,7 +204,7 @@ export function AreaChart({
           <div className="text-faint">{formatTime(hoverPoint.ts)}</div>
         </div>
       ) : null}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-between px-1 pb-0.5 text-[9.5px] text-faint">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-between px-1 pb-0.5 text-[11.5px] text-faint">
         <span>{formatTime(data[0].ts)}</span>
         <span>{formatTime(data[data.length - 1].ts)}</span>
       </div>

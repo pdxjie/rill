@@ -107,7 +107,7 @@ export function OverviewView() {
   if (loading && !overview) {
     return (
       <div className="flex h-full flex-col gap-4 overflow-hidden p-6">
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
           {Array.from({ length: 4 }).map((_, i) => (
             <Skeleton key={i} className="h-[116px] rounded-[14px]" />
           ))}
@@ -159,7 +159,7 @@ export function OverviewView() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-[20px] font-semibold tracking-[-0.02em] text-ink">概览</h1>
-              <span className="flex items-center gap-1.5 rounded-full border border-line bg-panel px-2 py-[2px] text-[10px] font-medium text-muted">
+              <span className="flex items-center gap-1.5 rounded-full border border-line bg-panel px-2 py-[2px] text-[12px] font-medium text-muted">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-50" />
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green" />
@@ -190,7 +190,7 @@ export function OverviewView() {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
           <div className="card group relative overflow-hidden p-4">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5 text-2xs font-medium uppercase tracking-[0.08em] text-faint">
@@ -263,7 +263,7 @@ export function OverviewView() {
                 </p>
               </div>
               <Ring value={overview.hitRate} size={50} width={4} color="#4ADE80">
-                <span className="text-[9px] font-semibold text-green">HIT</span>
+                <span className="text-[11.5px] font-semibold text-green">HIT</span>
               </Ring>
             </div>
             <div className="mt-2.5 flex items-center gap-1 text-2xs text-faint">
@@ -278,7 +278,7 @@ export function OverviewView() {
                 客户端连接
               </span>
               {conn.readOnly ? (
-                <span className="flex items-center gap-1 text-[9.5px] font-medium uppercase text-amber">
+                <span className="flex items-center gap-1 text-[11.5px] font-medium uppercase text-amber">
                   <Lock size={9} /> 只读
                 </span>
               ) : (
@@ -376,7 +376,7 @@ export function OverviewView() {
                         style={{ width: `${Math.max(2, (db.keys / maxDb) * 100)}%` }}
                       />
                     </div>
-                    <div className="flex justify-between text-[9.5px] text-faint">
+                    <div className="flex justify-between text-[11.5px] text-faint">
                       <span>过期 {formatInt(db.expires)}</span>
                       <span>avg ttl {formatDurationUs(db.avgTtl * 1000)}</span>
                     </div>
@@ -533,7 +533,7 @@ function HealthRow({
           <span className="text-xs text-ink">{label}</span>
           <span className="mono text-2xs tabular-nums text-muted">{value}</span>
         </div>
-        <p className="truncate text-[9.5px] text-faint">{hint}</p>
+        <p className="truncate text-[11.5px] text-faint">{hint}</p>
       </div>
     </div>
   )
@@ -651,7 +651,7 @@ function AnalysisModal({
                     return (
                       <div key={key.key} className="flex flex-col gap-1">
                         <div className="flex items-center justify-between gap-2">
-                          <span className="min-w-0 truncate mono text-[11px] text-ink" title={key.key}>
+                          <span className="min-w-0 truncate mono text-[12.5px] text-ink" title={key.key}>
                             {key.key}
                           </span>
                           <span className="shrink-0 text-2xs tabular-nums text-muted">
@@ -691,7 +691,7 @@ function AnalysisModal({
                 </div>
               </div>
             </div>
-            <p className="text-[10px] leading-relaxed text-faint">
+            <p className="text-[12px] leading-relaxed text-faint">
               提示：MEMORY USAGE 对集合类型使用 3 个样本估算；结果用于发现热点，不等同于精确的 RDB 体积。
             </p>
           </div>

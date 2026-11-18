@@ -70,7 +70,7 @@ export default function App() {
         <div className="relative animate-pulse">
           <LogoMark size={46} />
         </div>
-        <div className="relative flex items-center gap-2 text-[11px] text-faint">
+        <div className="relative flex items-center gap-2 text-[12.5px] text-faint">
           <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-accent" />
           正在载入连接…
         </div>
@@ -102,7 +102,7 @@ export default function App() {
               key={item.label}
               className="flex items-center justify-between gap-4 rounded-[6px] px-2 py-1.5 hover:bg-elevated/50"
             >
-              <span className="text-[11px] text-muted">{item.label}</span>
+              <span className="text-[12.5px] text-muted">{item.label}</span>
               <span className="flex shrink-0 items-center gap-1">
                 {item.keys.filter(Boolean).map((key) => (
                   <span key={key} className="kbd">
@@ -113,7 +113,7 @@ export default function App() {
             </div>
           ))}
         </div>
-        <div className="flex items-center gap-1.5 border-t border-line/70 px-4 py-2.5 text-[9.5px] text-faint">
+        <div className="flex items-center gap-1.5 border-t border-line/70 px-4 py-2.5 text-[11.5px] text-faint">
           <Zap size={9} className="text-accent" /> 提示：⌘K 可以搜索已加载的 Key，并直接跳转。
         </div>
       </Modal>

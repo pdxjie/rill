@@ -131,7 +131,7 @@ export function ValuePanel({
               Set 与 Stream 的类型化编辑。
             </p>
           </div>
-          <div className="flex items-center gap-3 text-[10px] text-faint">
+          <div className="flex items-center gap-3 text-[12px] text-faint">
             <span className="flex items-center gap-1">
               <span className="kbd">↑</span>
               <span className="kbd">↓</span> 切换
@@ -204,7 +204,7 @@ export function ValuePanel({
             </div>
             <CopyButton value={detail.meta.key} label="复制 Key 名" />
             {!writable ? (
-              <span className="ml-1 flex items-center gap-1 rounded-[4px] bg-amber/10 px-1.5 py-[1px] text-[9.5px] font-medium text-amber">
+              <span className="ml-1 flex items-center gap-1 rounded-[4px] bg-amber/10 px-1.5 py-[1px] text-[11.5px] font-medium text-amber">
                 <Lock size={9} /> 只读
               </span>
             ) : null}
@@ -214,7 +214,7 @@ export function ValuePanel({
             <button
               onClick={() => setTtlOpen(true)}
               className={cn(
-                'inline-flex items-center gap-1 rounded-[5px] border px-1.5 py-[1px] text-[10px] font-medium transition',
+                'inline-flex items-center gap-1 rounded-[5px] border px-1.5 py-[1px] text-[12px] font-medium transition',
                 ttlWarn
                   ? 'border-amber/25 bg-amber/10 text-amber'
                   : 'border-line bg-panel text-muted hover:text-ink',
@@ -223,15 +223,15 @@ export function ValuePanel({
               <Clock size={9} />
               {formatTtl(detail.meta.ttl)}
             </button>
-            <span className="inline-flex items-center gap-1 rounded-[5px] border border-line bg-panel px-1.5 py-[1px] text-[10px] text-muted">
+            <span className="inline-flex items-center gap-1 rounded-[5px] border border-line bg-panel px-1.5 py-[1px] text-[12px] text-muted">
               {formatBytes(detail.meta.size ?? 0)}
             </span>
             {detail.encoding ? (
-              <span className="mono rounded-[5px] border border-line bg-panel px-1.5 py-[1px] text-[9.5px] text-faint">
+              <span className="mono rounded-[5px] border border-line bg-panel px-1.5 py-[1px] text-[11.5px] text-faint">
                 {detail.encoding}
               </span>
             ) : null}
-            <span className="text-[10px] text-faint">
+            <span className="text-[12px] text-faint">
               {formatInt(detail.length)} {detail.meta.keyType === 'string' ? 'bytes' : 'items'}
             </span>
           </div>
@@ -454,27 +454,27 @@ function StringEditor({
           <button
             onClick={() => setPretty((p) => !p)}
             className={cn(
-              'inline-flex items-center gap-1 rounded-[5px] border px-1.5 py-[2px] text-[10px] font-medium transition',
+              'inline-flex items-center gap-1 rounded-[5px] border px-1.5 py-[2px] text-[12px] font-medium transition',
               pretty ? 'border-blue/25 bg-blue/10 text-blue' : 'border-line bg-panel text-muted hover:text-ink',
             )}
           >
             <Braces size={10} /> JSON
           </button>
         ) : (
-          <span className="inline-flex items-center gap-1 rounded-[5px] border border-line bg-panel px-1.5 py-[2px] text-[10px] text-faint">
+          <span className="inline-flex items-center gap-1 rounded-[5px] border border-line bg-panel px-1.5 py-[2px] text-[12px] text-faint">
             <FileJson size={10} /> TEXT
           </span>
         )}
         <button
           onClick={() => setWrap((w) => !w)}
           className={cn(
-            'inline-flex items-center gap-1 rounded-[5px] border px-1.5 py-[2px] text-[10px] font-medium transition',
+            'inline-flex items-center gap-1 rounded-[5px] border px-1.5 py-[2px] text-[12px] font-medium transition',
             wrap ? 'border-line bg-elevated text-ink' : 'border-line bg-panel text-muted hover:text-ink',
           )}
         >
           <WrapText size={10} /> 换行
         </button>
-        <span className="mono ml-1 text-[10px] text-faint">
+        <span className="mono ml-1 text-[12px] text-faint">
           {formatInt(value.bytes)} bytes · {value.binary ? 'binary' : 'utf-8'}
         </span>
         <div className="ml-auto flex items-center gap-1.5">
@@ -513,7 +513,7 @@ function StringEditor({
                 </Button>
               </>
             ) : value.binary || value.truncated ? (
-              <span className="flex items-center gap-1 text-[10px] text-faint">
+              <span className="flex items-center gap-1 text-[12px] text-faint">
                 <Lock size={10} /> {value.truncated ? '已截断，只读' : '二进制，只读'}
               </span>
             ) : (
@@ -526,7 +526,7 @@ function StringEditor({
       </div>
 
       {value.truncated ? (
-        <div className="flex items-center gap-2 border-b border-amber/20 bg-amber/5 px-3 py-1.5 text-[10.5px] text-amber">
+        <div className="flex items-center gap-2 border-b border-amber/20 bg-amber/5 px-3 py-1.5 text-[12px] text-amber">
           <AlertTriangle size={11} />
           内容超过 512 KB，编辑器仅展示前 512 KB，避免阻塞界面。
         </div>
@@ -548,9 +548,9 @@ function StringEditor({
               }
             }}
             spellCheck={false}
-            className="mono min-h-0 flex-1 resize-none border-0 bg-transparent px-4 py-3 text-[12.5px] leading-[1.7] text-ink outline-none"
+            className="mono min-h-0 flex-1 resize-none border-0 bg-transparent px-4 py-3 text-[13px] leading-[1.7] text-ink outline-none"
           />
-          <div className="flex items-center justify-between border-t border-line/60 px-3 py-1.5 text-[10px] text-faint">
+          <div className="flex items-center justify-between border-t border-line/60 px-3 py-1.5 text-[12px] text-faint">
             <span>
               {formatInt(draft.length)} 字符 · {formatBytes(new Blob([draft]).size)}
             </span>
@@ -618,7 +618,7 @@ function CollectionView({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className="flex items-center gap-2 border-b border-line/60 bg-panel/40 px-3 py-1.5 text-[10px] text-faint">
+      <div className="flex items-center gap-2 border-b border-line/60 bg-panel/40 px-3 py-1.5 text-[12px] text-faint">
         <span>
           已加载 <span className="tabular-nums text-muted">{formatInt(loaded)}</span> / {formatInt(total)}
         </span>
@@ -649,7 +649,7 @@ function CollectionView({
             加载更多
           </Button>
         ) : (
-          <span className="flex items-center gap-1 text-[10px] text-faint">
+          <span className="flex items-center gap-1 text-[12px] text-faint">
             <Check size={10} className="text-green" /> 已全部加载
           </span>
         )}
@@ -675,7 +675,7 @@ function HashTable({
   return (
     <table className="w-full table-fixed border-collapse text-xs">
       <thead className="sticky top-0 z-[1] bg-panel2/95 backdrop-blur">
-        <tr className="border-b border-line text-[9.5px] uppercase tracking-wider text-faint">
+        <tr className="border-b border-line text-[11.5px] uppercase tracking-wider text-faint">
           <th className="w-10 px-3 py-1.5 text-left font-medium">#</th>
           <th className="w-[36%] px-2 py-1.5 text-left font-medium">Field</th>
           <th className="px-2 py-1.5 text-left font-medium">Value</th>
@@ -685,9 +685,9 @@ function HashTable({
       <tbody>
         {items.map((item, index) => (
           <tr key={item.field} className="group border-b border-line/50 hover:bg-elevated/40">
-            <td className="px-3 py-1 text-[10px] tabular-nums text-faint">{index + 1}</td>
+            <td className="px-3 py-1 text-[12px] tabular-nums text-faint">{index + 1}</td>
             <td className="px-2 py-0.5">
-              <span className="block truncate mono text-[11.5px] text-blue/90" title={item.field}>
+              <span className="block truncate mono text-[12.5px] text-blue/90" title={item.field}>
                 {item.field}
               </span>
             </td>
@@ -744,7 +744,7 @@ function ListTable({
   return (
     <table className="w-full table-fixed border-collapse text-xs">
       <thead className="sticky top-0 z-[1] bg-panel2/95 backdrop-blur">
-        <tr className="border-b border-line text-[9.5px] uppercase tracking-wider text-faint">
+        <tr className="border-b border-line text-[11.5px] uppercase tracking-wider text-faint">
           <th className="w-16 px-3 py-1.5 text-left font-medium">Index</th>
           <th className="px-2 py-1.5 text-left font-medium">Value</th>
           <th className="w-9 px-2 py-1.5" />
@@ -753,7 +753,7 @@ function ListTable({
       <tbody>
         {items.map((item) => (
           <tr key={item.index} className="group border-b border-line/50 hover:bg-elevated/40">
-            <td className="px-3 py-1 mono text-[10px] tabular-nums text-faint">{item.index}</td>
+            <td className="px-3 py-1 mono text-[12px] tabular-nums text-faint">{item.index}</td>
             <td className="px-2 py-0.5">
               <EditableCell
                 value={item.value}
@@ -815,8 +815,8 @@ function SetTable({
           key={member}
           className="group flex items-center gap-2 border-b border-line/50 px-3 py-1.5 hover:bg-elevated/40"
         >
-          <span className="w-8 shrink-0 text-[10px] tabular-nums text-faint">{index + 1}</span>
-          <span className="min-w-0 flex-1 truncate mono text-[11.5px] text-ink" title={member}>
+          <span className="w-8 shrink-0 text-[12px] tabular-nums text-faint">{index + 1}</span>
+          <span className="min-w-0 flex-1 truncate mono text-[12.5px] text-ink" title={member}>
             {member}
           </span>
           <CopyButton value={member} />
@@ -859,7 +859,7 @@ function ZSetTable({
   return (
     <table className="w-full table-fixed border-collapse text-xs">
       <thead className="sticky top-0 z-[1] bg-panel2/95 backdrop-blur">
-        <tr className="border-b border-line text-[9.5px] uppercase tracking-wider text-faint">
+        <tr className="border-b border-line text-[11.5px] uppercase tracking-wider text-faint">
           <th className="w-10 px-3 py-1.5 text-left font-medium">#</th>
           <th className="px-2 py-1.5 text-left font-medium">Member</th>
           <th className="w-[92px] px-2 py-1.5 text-right font-medium">Score</th>
@@ -869,11 +869,11 @@ function ZSetTable({
       <tbody>
         {items.map((item, index) => (
           <tr key={item.member} className="group border-b border-line/50 hover:bg-elevated/40">
-            <td className="px-3 py-1 text-[10px] tabular-nums text-faint">
-              <span className="rounded bg-green/10 px-1 text-[9px] text-green">{index + 1}</span>
+            <td className="px-3 py-1 text-[12px] tabular-nums text-faint">
+              <span className="rounded bg-green/10 px-1 text-[11.5px] text-green">{index + 1}</span>
             </td>
             <td className="px-2 py-0.5">
-              <span className="block truncate mono text-[11.5px] text-ink" title={item.member}>
+              <span className="block truncate mono text-[12.5px] text-ink" title={item.member}>
                 {item.member}
               </span>
             </td>
@@ -930,16 +930,16 @@ function StreamTable({ entries }: { entries: { id: string; fields: FieldValue[] 
       {entries.map((entry) => (
         <div key={entry.id} className="border-b border-line/50 px-3 py-2 hover:bg-elevated/30">
           <div className="mb-1 flex items-center gap-2">
-            <span className="mono rounded bg-cyan/10 px-1.5 py-[1px] text-[10px] text-cyan">{entry.id}</span>
-            <span className="text-[9.5px] text-faint">{entry.fields.length} fields</span>
+            <span className="mono rounded bg-cyan/10 px-1.5 py-[1px] text-[12px] text-cyan">{entry.id}</span>
+            <span className="text-[11.5px] text-faint">{entry.fields.length} fields</span>
           </div>
           <div className="grid grid-cols-[140px_1fr] gap-x-3 gap-y-0.5">
             {entry.fields.map((field, i) => (
               <div key={`${field.field}-${i}`} className="contents">
-                <span className="truncate mono text-[10.5px] text-blue/80" title={field.field}>
+                <span className="truncate mono text-[12px] text-blue/80" title={field.field}>
                   {field.field}
                 </span>
-                <span className="min-w-0 truncate text-[11.5px] text-ink" title={field.value}>
+                <span className="min-w-0 truncate text-[12.5px] text-ink" title={field.value}>
                   {field.value}
                 </span>
               </div>
@@ -975,7 +975,7 @@ function EditableCell({
         disabled={disabled}
         onClick={() => !disabled && setEditing(true)}
         className={cn(
-          'block w-full truncate rounded px-1 py-[1px] text-left text-[11.5px] text-ink transition hover:bg-elevated',
+          'block w-full truncate rounded px-1 py-[1px] text-left text-[12.5px] text-ink transition hover:bg-elevated',
           align === 'right' && 'text-right',
           disabled && 'cursor-default',
         )}
@@ -1013,7 +1013,7 @@ function EditableCell({
             setEditing(false)
           }
         }}
-        className="h-[22px] w-full rounded border border-accent/50 bg-app px-1 text-[11.5px] text-ink outline-none"
+        className="h-[22px] w-full rounded border border-accent/50 bg-app px-1 text-[12.5px] text-ink outline-none"
       />
       {saving ? <Loader2 size={11} className="animate-spin text-faint" /> : null}
     </div>
@@ -1039,7 +1039,7 @@ function CollectionAddBar({
 
   if (!writable || kind === 'stream' || kind === 'string' || kind === 'unsupported') {
     return kind === 'stream' ? (
-      <span className="text-[10px] text-faint">Stream 只读展示，使用 XADD 写入</span>
+      <span className="text-[12px] text-faint">Stream 只读展示，使用 XADD 写入</span>
     ) : null
   }
 
@@ -1098,7 +1098,7 @@ function CollectionAddBar({
         value={field}
         onChange={(event) => setField(event.target.value)}
         placeholder={kind === 'hash' ? 'field' : kind === 'zset' ? 'member' : 'value'}
-        className="h-[26px] w-[150px] rounded-[6px] border border-line bg-panel px-2 mono text-[11px] outline-none placeholder:text-faint focus:border-accent/60"
+        className="h-[26px] w-[150px] rounded-[6px] border border-line bg-panel px-2 mono text-[12.5px] outline-none placeholder:text-faint focus:border-accent/60"
         onKeyDown={(event) => {
           if (event.key === 'Enter') void submit()
         }}
@@ -1108,7 +1108,7 @@ function CollectionAddBar({
           value={second}
           onChange={(event) => setSecond(event.target.value)}
           placeholder="value"
-          className="h-[26px] w-[150px] rounded-[6px] border border-line bg-panel px-2 mono text-[11px] outline-none placeholder:text-faint focus:border-accent/60"
+          className="h-[26px] w-[150px] rounded-[6px] border border-line bg-panel px-2 mono text-[12.5px] outline-none placeholder:text-faint focus:border-accent/60"
           onKeyDown={(event) => {
             if (event.key === 'Enter') void submit()
           }}
@@ -1119,7 +1119,7 @@ function CollectionAddBar({
           value={second}
           onChange={(event) => setSecond(event.target.value)}
           placeholder="score"
-          className="h-[26px] w-[72px] rounded-[6px] border border-line bg-panel px-2 text-right mono text-[11px] outline-none placeholder:text-faint focus:border-accent/60"
+          className="h-[26px] w-[72px] rounded-[6px] border border-line bg-panel px-2 text-right mono text-[12.5px] outline-none placeholder:text-faint focus:border-accent/60"
           onKeyDown={(event) => {
             if (event.key === 'Enter') void submit()
           }}
@@ -1165,7 +1165,7 @@ function TtlModal({
               key={value}
               onClick={() => setSeconds(value)}
               className={cn(
-                'flex-1 rounded-[7px] border px-2 py-1.5 text-[11px] transition',
+                'flex-1 rounded-[7px] border px-2 py-1.5 text-[12.5px] transition',
                 seconds === value
                   ? 'border-accent/40 bg-accent/10 text-accent'
                   : 'border-line bg-panel text-muted hover:text-ink',

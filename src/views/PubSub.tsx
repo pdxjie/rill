@@ -186,8 +186,8 @@ export function PubSubView() {
       <aside className="flex w-[290px] shrink-0 flex-col border-r border-line/70">
         <div className="flex h-[40px] items-center gap-1.5 border-b border-line/70 px-3">
           <Radio size={12} className="text-accent" />
-          <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">频道</span>
-          <span className="text-[9px] text-faint">PUBSUB CHANNELS</span>
+          <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">频道</span>
+          <span className="text-[11.5px] text-faint">PUBSUB CHANNELS</span>
           <IconButton icon={RefreshCw} label="刷新频道" className="ml-auto h-6 w-6" onClick={() => void loadChannels()} />
         </div>
         <div className="scroll-area min-h-0 flex-1 border-b border-line/60 py-1">
@@ -198,7 +198,7 @@ export function PubSubView() {
               ))}
             </div>
           ) : channels.length === 0 ? (
-            <p className="px-3 py-6 text-center text-[10px] text-faint">当前没有活跃频道</p>
+            <p className="px-3 py-6 text-center text-[12px] text-faint">当前没有活跃频道</p>
           ) : (
             channels.map((channel) => {
               const active = subscribed.includes(channel)
@@ -215,9 +215,9 @@ export function PubSubView() {
                     className="h-1.5 w-1.5 rounded-full"
                     style={{ background: channelColor(channel), boxShadow: active ? `0 0 8px ${channelColor(channel)}` : undefined }}
                   />
-                  <span className="min-w-0 flex-1 truncate mono text-[10.5px] text-ink">{channel}</span>
+                  <span className="min-w-0 flex-1 truncate mono text-[12px] text-ink">{channel}</span>
                   {active ? (
-                    <span className="text-[8.5px] font-medium uppercase text-green">on</span>
+                    <span className="text-[11.5px] font-medium uppercase text-green">on</span>
                   ) : (
                     <Plus size={9} className="text-faint opacity-0 transition group-hover:opacity-100" />
                   )}
@@ -228,7 +228,7 @@ export function PubSubView() {
         </div>
 
         <div className="flex flex-col gap-2 border-b border-line/60 p-3">
-          <label className="text-[9.5px] font-medium uppercase tracking-wider text-faint">订阅（支持 * 通配）</label>
+          <label className="text-[11.5px] font-medium uppercase tracking-wider text-faint">订阅（支持 * 通配）</label>
           <div className="flex gap-1.5">
             <input
               value={subscribeInput}
@@ -237,7 +237,7 @@ export function PubSubView() {
                 if (event.key === 'Enter') void subscribe(subscribeInput.split(','))
               }}
               placeholder="order.*, notifications"
-              className="h-[27px] min-w-0 flex-1 rounded-[6px] border border-line bg-panel px-2 mono text-[10.5px] outline-none placeholder:text-faint focus:border-accent/50"
+              className="h-[27px] min-w-0 flex-1 rounded-[6px] border border-line bg-panel px-2 mono text-[12px] outline-none placeholder:text-faint focus:border-accent/50"
             />
             <Button
               size="sm"
@@ -253,7 +253,7 @@ export function PubSubView() {
               {subscribed.map((channel) => (
                 <span
                   key={channel}
-                  className="inline-flex items-center gap-1 rounded-[5px] border border-line bg-panel px-1.5 py-[1px] mono text-[9.5px] text-muted"
+                  className="inline-flex items-center gap-1 rounded-[5px] border border-line bg-panel px-1.5 py-[1px] mono text-[11.5px] text-muted"
                 >
                   <span className="h-1 w-1 rounded-full" style={{ background: channelColor(channel) }} />
                   {channel}
@@ -264,25 +264,25 @@ export function PubSubView() {
               ))}
             </div>
           ) : (
-            <p className="text-[9.5px] leading-relaxed text-faint">订阅使用独立连接，不会阻塞键空间操作。</p>
+            <p className="text-[11.5px] leading-relaxed text-faint">订阅使用独立连接，不会阻塞键空间操作。</p>
           )}
         </div>
 
         <div className="flex shrink-0 flex-col gap-2 border-t border-line/60 p-3">
-          <label className="flex items-center gap-1 text-[9.5px] font-medium uppercase tracking-wider text-faint">
+          <label className="flex items-center gap-1 text-[11.5px] font-medium uppercase tracking-wider text-faint">
             <Send size={9} /> 发布消息
           </label>
           <input
             value={publishChannel}
             onChange={(event) => setPublishChannel(event.target.value)}
-            className="h-[26px] rounded-[6px] border border-line bg-panel px-2 mono text-[10px] outline-none focus:border-accent/50"
+            className="h-[26px] rounded-[6px] border border-line bg-panel px-2 mono text-[12px] outline-none focus:border-accent/50"
             placeholder="channel"
           />
           <textarea
             value={payload}
             onChange={(event) => setPayload(event.target.value)}
             spellCheck={false}
-            className="mono h-[92px] resize-none rounded-[7px] border border-line bg-panel px-2 py-1.5 text-[10.5px] leading-relaxed outline-none focus:border-accent/50"
+            className="mono h-[92px] resize-none rounded-[7px] border border-line bg-panel px-2 py-1.5 text-[12px] leading-relaxed outline-none focus:border-accent/50"
             placeholder='{"event":"test"}'
           />
           <Button
@@ -296,7 +296,7 @@ export function PubSubView() {
             发布
           </Button>
           {conn.readOnly ? (
-            <p className="text-[9px] text-amber">只读保护已开启，无法发布消息。</p>
+            <p className="text-[11.5px] text-amber">只读保护已开启，无法发布消息。</p>
           ) : null}
         </div>
       </aside>
@@ -305,10 +305,10 @@ export function PubSubView() {
         <div className="flex min-h-[44px] items-center gap-2 border-b border-line/70 px-4 py-2">
           <span className={cn('h-1.5 w-1.5 rounded-full', subscribed.length ? 'animate-pulse-dot bg-green' : 'bg-faint')} />
           <h1 className="text-sm font-semibold text-ink">消息流</h1>
-          <span className="text-[10px] text-faint">
+          <span className="text-[12px] text-faint">
             {subscribed.length ? `订阅 ${subscribed.length} 个频道 · 实时` : '未订阅'}
           </span>
-          <span className="ml-2 rounded-[4px] border border-line bg-panel px-1.5 py-[1px] text-[9.5px] tabular-nums text-muted">
+          <span className="ml-2 rounded-[4px] border border-line bg-panel px-1.5 py-[1px] text-[11.5px] tabular-nums text-muted">
             {formatInt(messages.length)}
           </span>
           <div className="ml-auto flex items-center gap-1.5">
@@ -316,7 +316,7 @@ export function PubSubView() {
               value={filter}
               onChange={(event) => setFilter(event.target.value)}
               placeholder="筛选消息"
-              className="h-[26px] w-[140px] rounded-[6px] border border-line bg-panel px-2 text-[10px] outline-none placeholder:text-faint focus:border-accent/50"
+              className="h-[26px] w-[140px] rounded-[6px] border border-line bg-panel px-2 text-[12px] outline-none placeholder:text-faint focus:border-accent/50"
             />
             <IconButton
               icon={paused ? Play : Pause}
@@ -358,24 +358,24 @@ export function PubSubView() {
                 return (
                   <div key={`${message.ts}-${index}`} className="group px-4 py-2.5 hover:bg-elevated/20">
                     <div className="flex items-center gap-2">
-                      <span className="mono text-[9.5px] tabular-nums text-faint">{formatClock(message.ts)}</span>
+                      <span className="mono text-[11.5px] tabular-nums text-faint">{formatClock(message.ts)}</span>
                       <span
-                        className="rounded-[4px] px-1.5 py-[1px] mono text-[9.5px] font-medium"
+                        className="rounded-[4px] px-1.5 py-[1px] mono text-[11.5px] font-medium"
                         style={{ background: `${channelColor(message.channel)}18`, color: channelColor(message.channel) }}
                       >
                         {message.channel}
                       </span>
                       {message.pattern ? (
-                        <span className="text-[9px] text-faint">pattern: {message.pattern}</span>
+                        <span className="text-[11.5px] text-faint">pattern: {message.pattern}</span>
                       ) : null}
-                      <span className="ml-auto text-[9px] text-faint">{message.payload.length} B</span>
+                      <span className="ml-auto text-[11.5px] text-faint">{message.payload.length} B</span>
                     </div>
                     {json.ok ? (
-                      <pre className="mono mt-1.5 max-h-[180px] overflow-auto rounded-[6px] border border-line/50 bg-app/40 px-2.5 py-1.5 text-[10.5px] leading-[1.65]">
+                      <pre className="mono mt-1.5 max-h-[180px] overflow-auto rounded-[6px] border border-line/50 bg-app/40 px-2.5 py-1.5 text-[12px] leading-[1.65]">
                         <code dangerouslySetInnerHTML={{ __html: jsonToHtml(json.text) }} />
                       </pre>
                     ) : (
-                      <pre className="mono mt-1.5 whitespace-pre-wrap break-all text-[10.5px] leading-[1.65] text-ink">
+                      <pre className="mono mt-1.5 whitespace-pre-wrap break-all text-[12px] leading-[1.65] text-ink">
                         {message.payload}
                       </pre>
                     )}
@@ -386,7 +386,7 @@ export function PubSubView() {
           )}
         </div>
 
-        <div className="flex h-[28px] shrink-0 items-center justify-between border-t border-line/70 bg-panel/30 px-4 text-[9px] text-faint">
+        <div className="flex h-[28px] shrink-0 items-center justify-between border-t border-line/70 bg-panel/30 px-4 text-[11.5px] text-faint">
           <span className="flex items-center gap-1">
             <ArrowDown size={9} /> {paused ? '自动滚动已暂停' : '自动滚动到底部'} · 最多保留 300 条
           </span>

@@ -108,7 +108,7 @@ export function DatabasePicker({ conn }: { conn: ConnectionView }) {
         )}
       >
         <Database size={10} className="text-accent" />
-        <span className="mono text-[10px] font-medium">db{conn.db}</span>
+        <span className="mono text-[12px] font-medium">db{conn.db}</span>
         <ChevronDown
           size={9}
           className={cn('text-faint transition-transform', open && 'rotate-180')}
@@ -124,8 +124,8 @@ export function DatabasePicker({ conn }: { conn: ConnectionView }) {
             >
               <div className="flex h-[38px] items-center gap-1.5 border-b border-line/70 px-3">
                 <Database size={12} className="text-accent" />
-                <span className="text-[11px] font-semibold text-ink">选择数据库</span>
-                <span className="text-[9px] text-faint">
+                <span className="text-[12.5px] font-semibold text-ink">选择数据库</span>
+                <span className="text-[11.5px] text-faint">
                   {databases.length ? `${databases.length} 个` : ''}
                 </span>
                 <IconButton
@@ -144,10 +144,10 @@ export function DatabasePicker({ conn }: { conn: ConnectionView }) {
                 </div>
               ) : error ? (
                 <div className="flex flex-col items-center gap-2 px-4 py-6 text-center">
-                  <p className="text-[10.5px] text-red">{error}</p>
+                  <p className="text-[12px] text-red">{error}</p>
                   <button
                     onClick={() => void load()}
-                    className="rounded-[6px] border border-line px-2 py-1 text-[10px] text-muted hover:text-ink"
+                    className="rounded-[6px] border border-line px-2 py-1 text-[12px] text-muted hover:text-ink"
                   >
                     重试
                   </button>
@@ -170,13 +170,13 @@ export function DatabasePicker({ conn }: { conn: ConnectionView }) {
                       >
                         <span
                           className={cn(
-                            'mono text-[11px] font-medium',
+                            'mono text-[12.5px] font-medium',
                             current ? 'text-accent' : 'text-ink',
                           )}
                         >
                           db{entry.index}
                         </span>
-                        <span className="ml-auto text-[9.5px] tabular-nums text-faint">
+                        <span className="ml-auto text-[11.5px] tabular-nums text-faint">
                           {entry.keys ? formatInt(entry.keys) : '空'}
                         </span>
                         {switching === entry.index ? (
@@ -192,7 +192,7 @@ export function DatabasePicker({ conn }: { conn: ConnectionView }) {
                 </div>
               )}
 
-              <div className="flex items-center justify-between border-t border-line/70 px-3 py-1.5 text-[9px] text-faint">
+              <div className="flex items-center justify-between border-t border-line/70 px-3 py-1.5 text-[11.5px] text-faint">
                 <span>切换只影响当前连接，不会清空数据</span>
                 {loading && databases.length ? <Spinner size={9} /> : <span className="mono">SELECT</span>}
               </div>

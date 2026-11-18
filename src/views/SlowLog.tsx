@@ -84,7 +84,7 @@ export function SlowLogView() {
       <div className="flex items-center gap-2 border-b border-line/70 px-4 py-2.5">
         <Timer size={14} className="text-amber" />
         <h1 className="text-sm font-semibold text-ink">慢日志</h1>
-        <span className="text-[10px] text-faint">SLOWLOG GET · 服务端阈值</span>
+        <span className="text-[12px] text-faint">SLOWLOG GET · 服务端阈值</span>
         <div className="ml-auto flex items-center gap-1.5">
           <div className="relative">
             <Search size={11} className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-faint" />
@@ -92,14 +92,14 @@ export function SlowLogView() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="筛选命令 / 客户端"
-              className="h-[26px] w-[180px] rounded-[6px] border border-line bg-panel pl-6 pr-2 text-[10.5px] outline-none placeholder:text-faint focus:border-accent/50"
+              className="h-[26px] w-[180px] rounded-[6px] border border-line bg-panel pl-6 pr-2 text-[12px] outline-none placeholder:text-faint focus:border-accent/50"
             />
           </div>
           <div className="relative">
             <select
               value={count}
               onChange={(event) => setCount(Number(event.target.value))}
-              className="h-[26px] appearance-none rounded-[6px] border border-line bg-panel pl-2 pr-5 text-[10.5px] text-muted outline-none"
+              className="h-[26px] appearance-none rounded-[6px] border border-line bg-panel pl-2 pr-5 text-[12px] text-muted outline-none"
             >
               <option value={64}>最近 64 条</option>
               <option value={128}>最近 128 条</option>
@@ -125,7 +125,7 @@ export function SlowLogView() {
         </div>
       </div>
 
-      <div className="flex items-center gap-5 border-b border-line/60 bg-panel/30 px-4 py-2 text-[10px] text-faint">
+      <div className="flex items-center gap-5 border-b border-line/60 bg-panel/30 px-4 py-2 text-[12px] text-faint">
         <span>
           条数 <span className="ml-1 tabular-nums text-ink">{formatInt(entries.length)}</span>
         </span>
@@ -171,7 +171,7 @@ export function SlowLogView() {
           </div>
         ) : (
           <div>
-            <div className="sticky top-0 z-[1] grid grid-cols-[64px_100px_160px_1fr_170px] gap-3 border-b border-line/70 bg-panel2/95 px-4 py-2 text-[9.5px] font-medium uppercase tracking-wider text-faint backdrop-blur">
+            <div className="sticky top-0 z-[1] grid grid-cols-[64px_100px_160px_1fr_170px] gap-3 border-b border-line/70 bg-panel2/95 px-4 py-2 text-[11.5px] font-medium uppercase tracking-wider text-faint backdrop-blur">
               <span>ID</span>
               <span>时间</span>
               <span>耗时</span>
@@ -192,8 +192,8 @@ export function SlowLogView() {
                       isOpen && 'bg-elevated/30',
                     )}
                   >
-                    <span className="mono text-[10px] tabular-nums text-faint">#{entry.id}</span>
-                    <span className="text-[10px] text-muted" title={formatDateTime(entry.timestamp * 1000)}>
+                    <span className="mono text-[12px] tabular-nums text-faint">#{entry.id}</span>
+                    <span className="text-[12px] text-muted" title={formatDateTime(entry.timestamp * 1000)}>
                       {timeAgoSeconds(entry.timestamp)}
                     </span>
                     <div className="flex items-center gap-2">
@@ -208,7 +208,7 @@ export function SlowLogView() {
                       </div>
                       <span
                         className={cn(
-                          'mono text-[10px] tabular-nums',
+                          'mono text-[12px] tabular-nums',
                           tone === 'red' ? 'text-red' : tone === 'amber' ? 'text-amber' : 'text-green',
                         )}
                       >
@@ -216,14 +216,14 @@ export function SlowLogView() {
                       </span>
                     </div>
                     <div className="flex min-w-0 items-center gap-1.5">
-                      <span className="rounded bg-accent/10 px-1.5 py-[1px] mono text-[10px] font-medium text-accent">
+                      <span className="rounded bg-accent/10 px-1.5 py-[1px] mono text-[12px] font-medium text-accent">
                         {entry.args[0]?.toUpperCase() ?? '—'}
                       </span>
-                      <span className="min-w-0 truncate mono text-[10.5px] text-muted">
+                      <span className="min-w-0 truncate mono text-[12px] text-muted">
                         {truncate(entry.args.slice(1).join(' '), 80)}
                       </span>
                     </div>
-                    <span className="truncate text-right mono text-[10px] text-faint" title={entry.client}>
+                    <span className="truncate text-right mono text-[12px] text-faint" title={entry.client}>
                       {entry.clientName ? `${entry.clientName} · ` : ''}
                       {entry.client}
                     </span>
@@ -231,7 +231,7 @@ export function SlowLogView() {
                   {isOpen ? (
                     <div className="mx-4 mb-2 rounded-[8px] border border-line/70 bg-app/50 p-3">
                       <div className="mb-2 flex items-center justify-between">
-                        <span className="text-[10px] font-medium uppercase tracking-wider text-faint">
+                        <span className="text-[12px] font-medium uppercase tracking-wider text-faint">
                           完整命令 · {entry.args.length} 参数
                         </span>
                         <div className="flex items-center gap-1">
@@ -240,16 +240,16 @@ export function SlowLogView() {
                               const command = entry.args.join(' ')
                               if (await copyText(command)) toast.success('已复制命令')
                             }}
-                            className="flex items-center gap-1 rounded px-1.5 py-[2px] text-[9.5px] text-muted transition hover:bg-elevated hover:text-ink"
+                            className="flex items-center gap-1 rounded px-1.5 py-[2px] text-[11.5px] text-muted transition hover:bg-elevated hover:text-ink"
                           >
                             <Copy size={9} /> 复制
                           </button>
-                          <span className="text-[9.5px] text-faint">
+                          <span className="text-[11.5px] text-faint">
                             {formatDateTime(entry.timestamp * 1000)} · {entry.durationUs} µs
                           </span>
                         </div>
                       </div>
-                      <pre className="mono whitespace-pre-wrap break-all text-[11px] leading-[1.7] text-ink">
+                      <pre className="mono whitespace-pre-wrap break-all text-[12.5px] leading-[1.7] text-ink">
                         {entry.args.map((arg, index) => (
                           <span key={index}>
                             {index > 0 ? ' ' : ''}
@@ -273,7 +273,7 @@ export function SlowLogView() {
               )
             })}
             {filtered.length === 0 ? (
-              <p className="px-4 py-10 text-center text-[11px] text-faint">没有匹配“{query}”的记录</p>
+              <p className="px-4 py-10 text-center text-[12.5px] text-faint">没有匹配“{query}”的记录</p>
             ) : null}
           </div>
         )}

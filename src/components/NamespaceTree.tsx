@@ -262,14 +262,14 @@ export function NamespaceTree({
       <div className="sticky top-0 z-[2] border-b border-line/70 bg-panel2/95 px-3 py-2 backdrop-blur">
         <div className="flex items-center gap-1.5">
           <Layers size={12} className="text-accent" />
-          <span className="text-[11px] font-semibold text-ink">命名空间</span>
-          <span className="text-[9px] tabular-nums text-faint">
+          <span className="text-[12.5px] font-semibold text-ink">命名空间</span>
+          <span className="text-[11.5px] tabular-nums text-faint">
             {formatInt(data.entries.length)} 节点
           </span>
           {data.done ? (
-            <span className="rounded-[3px] bg-green/10 px-1 text-[8.5px] text-green">完整</span>
+            <span className="rounded-[3px] bg-green/10 px-1 text-[11.5px] text-green">完整</span>
           ) : (
-            <span className="rounded-[3px] bg-amber/10 px-1 text-[8.5px] text-amber">部分</span>
+            <span className="rounded-[3px] bg-amber/10 px-1 text-[11.5px] text-amber">部分</span>
           )}
           {loading || scanning ? (
             <RefreshCw size={10} className="animate-spin text-faint" />
@@ -283,7 +283,7 @@ export function NamespaceTree({
         </div>
 
         <div className="mt-1 flex items-center gap-2">
-          <span className="min-w-0 flex-1 truncate text-[9.5px] tabular-nums text-muted">
+          <span className="min-w-0 flex-1 truncate text-[11.5px] tabular-nums text-muted">
             {filtered ? (
               <>已扫描 {formatInt(progress.scanned || data.scanned)} 个匹配 Key</>
             ) : (
@@ -305,14 +305,14 @@ export function NamespaceTree({
             scanning ? (
               <button
                 onClick={onStopScan}
-                className="shrink-0 rounded-[5px] border border-line bg-panel px-1.5 py-[2px] text-[9px] text-muted transition hover:bg-elevated hover:text-ink"
+                className="shrink-0 rounded-[5px] border border-line bg-panel px-1.5 py-[2px] text-[11.5px] text-muted transition hover:bg-elevated hover:text-ink"
               >
                 停止
               </button>
             ) : (
               <button
                 onClick={onScanAll}
-                className="shrink-0 rounded-[5px] border border-accent/30 bg-accent/10 px-1.5 py-[2px] text-[9px] font-medium text-accent transition hover:bg-accent/15"
+                className="shrink-0 rounded-[5px] border border-accent/30 bg-accent/10 px-1.5 py-[2px] text-[11.5px] font-medium text-accent transition hover:bg-accent/15"
               >
                 扫描完整
               </button>
@@ -333,24 +333,24 @@ export function NamespaceTree({
           </div>
         ) : null}
 
-        <p className="mt-1 text-[9px] leading-relaxed text-faint">
+        <p className="mt-1 text-[11.5px] leading-relaxed text-faint">
           基于当前筛选条件的 SCAN 聚合；展开文件夹加载直属 Key，选中 Key 在右侧查看、编辑或删除。
           {data.rootKeys > 0 ? ` 另有 ${formatInt(data.rootKeys)} 个根级 Key。` : ''}
         </p>
         {!data.done ? (
-          <div className="mt-1 text-[9px] leading-relaxed text-amber/90">
+          <div className="mt-1 text-[11.5px] leading-relaxed text-amber/90">
             {scanning
               ? '正在后台分批扫描剩余 Key，计数会随进度增长；期间可继续浏览已加载的命名空间。'
               : '当前只是部分结果。点「扫描完整」继续扫描，或输入更具体的前缀缩小范围。'}
           </div>
         ) : null}
         {data.truncated ? (
-          <div className="mt-1.5 flex items-start gap-1.5 rounded-[6px] border border-amber/20 bg-amber/5 px-2 py-1 text-[9.5px] leading-relaxed text-amber">
+          <div className="mt-1.5 flex items-start gap-1.5 rounded-[6px] border border-amber/20 bg-amber/5 px-2 py-1 text-[11.5px] leading-relaxed text-amber">
             <AlertTriangle size={10} className="mt-[1px] shrink-0" />
             节点数量超过 8000，树中只展示前 8000 个命名空间；可输入更具体的前缀缩小范围。
           </div>
         ) : null}
-        {error ? <div className="mt-1.5 text-[9.5px] text-red">{error}</div> : null}
+        {error ? <div className="mt-1.5 text-[11.5px] text-red">{error}</div> : null}
       </div>
 
       {rows.map((row) => {
@@ -392,8 +392,8 @@ export function NamespaceTree({
                 ) : (
                   <Folder size={12} className="shrink-0 text-amber/60" />
                 )}
-                <span className="truncate text-[11.5px] text-ink/90">{entry.name}</span>
-                <span className="shrink-0 rounded bg-line/40 px-1 text-[9px] tabular-nums text-faint">
+                <span className="truncate text-[12.5px] text-ink/90">{entry.name}</span>
+                <span className="shrink-0 rounded bg-line/40 px-1 text-[11.5px] tabular-nums text-faint">
                   {formatInt(entry.count)}
                 </span>
                 {state?.loading ? <Loader2 size={9} className="animate-spin text-faint" /> : null}
@@ -437,7 +437,7 @@ export function NamespaceTree({
               >
                 <span
                   className={cn(
-                    'truncate mono text-[11px]',
+                    'truncate mono text-[12.5px]',
                     active ? 'text-ink' : 'text-muted group-hover:text-ink',
                   )}
                 >
@@ -446,7 +446,7 @@ export function NamespaceTree({
                 </span>
                 <span
                   className={cn(
-                    'ml-auto shrink-0 text-[9px] tabular-nums',
+                    'ml-auto shrink-0 text-[11.5px] tabular-nums',
                     key.ttl >= 0 && key.ttl < 300
                       ? 'text-amber'
                       : key.ttl < 0
@@ -466,7 +466,7 @@ export function NamespaceTree({
           return (
             <div
               key={`status:${prefix}:${status}:${depth}`}
-              className="flex h-[28px] items-center gap-1.5 pr-2 text-[9.5px] text-faint"
+              className="flex h-[28px] items-center gap-1.5 pr-2 text-[11.5px] text-faint"
               style={{ paddingLeft: 8 + depth * 14 + 11 }}
             >
               {status === 'loading' ? (
@@ -512,7 +512,7 @@ export function NamespaceTree({
         />
       ) : null}
 
-      <div className="mx-3 my-2 flex items-start gap-1.5 rounded-[6px] border border-line/60 bg-panel/40 px-2 py-1.5 text-[9px] leading-relaxed text-faint">
+      <div className="mx-3 my-2 flex items-start gap-1.5 rounded-[6px] border border-line/60 bg-panel/40 px-2 py-1.5 text-[11.5px] leading-relaxed text-faint">
         <Search size={9} className="mt-[2px] shrink-0" />
         文件夹只负责展开层级；展开后直接显示该层 Key。点击 Key 在右侧查看/编辑/删除、修改 TTL。
       </div>

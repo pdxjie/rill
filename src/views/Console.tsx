@@ -138,16 +138,16 @@ export function ConsoleView() {
       <div className="flex h-[44px] items-center gap-2 border-b border-line/70 px-4">
         <TerminalSquare size={14} className="text-accent" />
         <span className="text-xs font-medium text-ink">命令控制台</span>
-        <span className="mono text-[10px] text-faint">
+        <span className="mono text-[12px] text-faint">
           {conn.host}:{conn.port} / db{conn.db}
         </span>
         {conn.readOnly ? (
-          <span className="ml-1 flex items-center gap-1 rounded-[4px] bg-amber/10 px-1.5 py-[1px] text-[9.5px] font-medium text-amber">
+          <span className="ml-1 flex items-center gap-1 rounded-[4px] bg-amber/10 px-1.5 py-[1px] text-[11.5px] font-medium text-amber">
             <Lock size={9} /> 只读保护
           </span>
         ) : null}
         <div className="ml-auto flex items-center gap-1.5">
-          <span className="text-[10px] text-faint">共 {formatNumber(entries.length)} 条</span>
+          <span className="text-[12px] text-faint">共 {formatNumber(entries.length)} 条</span>
           <IconButton icon={History} label="历史命令" active={historyOpen} onClick={() => setHistoryOpen((v) => !v)} />
           <IconButton
             icon={Eraser}
@@ -180,8 +180,8 @@ export function ConsoleView() {
                       onClick={() => void execute(item.label)}
                       className="group flex flex-col items-start gap-1 rounded-[10px] border border-line bg-panel px-3 py-2 text-left transition hover:border-accent/30 hover:bg-panel2"
                     >
-                      <span className="mono text-[11px] text-ink group-hover:text-accent">{item.label}</span>
-                      <span className="text-[9.5px] text-faint">{item.hint}</span>
+                      <span className="mono text-[12.5px] text-ink group-hover:text-accent">{item.label}</span>
+                      <span className="text-[11.5px] text-faint">{item.hint}</span>
                     </button>
                   ))}
                 </div>
@@ -199,7 +199,7 @@ export function ConsoleView() {
         {historyOpen ? (
           <div className="flex w-[280px] shrink-0 flex-col border-l border-line/70 bg-panel/30">
             <div className="flex h-9 items-center justify-between border-b border-line/60 px-3">
-              <span className="text-[10px] font-medium uppercase tracking-wider text-faint">历史命令</span>
+              <span className="text-[12px] font-medium uppercase tracking-wider text-faint">历史命令</span>
               <div className="flex items-center gap-0.5">
                 <IconButton
                   icon={Trash2}
@@ -215,7 +215,7 @@ export function ConsoleView() {
             </div>
             <div className="scroll-area flex-1 py-1">
               {history.length === 0 ? (
-                <p className="px-3 py-6 text-center text-[10.5px] text-faint">还没有执行过命令</p>
+                <p className="px-3 py-6 text-center text-[12px] text-faint">还没有执行过命令</p>
               ) : (
                 history.map((command, index) => (
                   <button
@@ -227,8 +227,8 @@ export function ConsoleView() {
                     }}
                     className="group flex w-full items-start gap-2 px-3 py-1.5 text-left hover:bg-elevated/60"
                   >
-                    <span className="mt-[3px] text-[9px] tabular-nums text-faint">{index + 1}</span>
-                    <span className="min-w-0 flex-1 break-all mono text-[10.5px] leading-relaxed text-muted group-hover:text-ink">
+                    <span className="mt-[3px] text-[11.5px] tabular-nums text-faint">{index + 1}</span>
+                    <span className="min-w-0 flex-1 break-all mono text-[12px] leading-relaxed text-muted group-hover:text-ink">
                       {command}
                     </span>
                   </button>
@@ -242,7 +242,7 @@ export function ConsoleView() {
       <div className="shrink-0 border-t border-line/80 bg-panel/40 px-3 pb-3 pt-2.5">
         <div className="flex items-end gap-2 rounded-[10px] border border-line bg-app px-3 py-2 transition focus-within:border-accent/45 focus-within:shadow-[0_0_0_3px_rgb(var(--accent)/0.09)]">
           <div className="flex min-w-0 flex-1 items-start gap-2">
-            <span className="flex h-[30px] shrink-0 items-center mono text-[12px] leading-5 text-accent">
+            <span className="flex h-[30px] shrink-0 items-center mono text-[13px] leading-5 text-accent">
               ❯
             </span>
             <textarea
@@ -275,29 +275,29 @@ export function ConsoleView() {
             }}
             placeholder="输入 Redis 命令，Enter 执行，Shift+Enter 换行，↑↓ 浏览历史"
             spellCheck={false}
-            className="mono max-h-[96px] min-h-[30px] flex-1 resize-none border-0 bg-transparent px-0 py-[5px] text-[12px] leading-5 text-ink outline-none placeholder:text-faint"
+            className="mono max-h-[96px] min-h-[30px] flex-1 resize-none border-0 bg-transparent px-0 py-[5px] text-[13px] leading-5 text-ink outline-none placeholder:text-faint"
           />
           </div>
           <div className="mb-[2px] flex shrink-0 items-center gap-1.5">
             {runningCount > 0 ? (
-              <span className="flex items-center gap-1 text-[10px] text-muted">
+              <span className="flex items-center gap-1 text-[12px] text-muted">
                 <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-amber" /> 执行中
               </span>
             ) : (
-              <span className="hidden items-center gap-1 text-[10px] text-faint sm:flex">
+              <span className="hidden items-center gap-1 text-[12px] text-faint sm:flex">
                 <CornerDownLeft size={10} /> 执行
               </span>
             )}
             <button
               onClick={submit}
               disabled={!input.trim()}
-              className="flex h-[26px] items-center gap-1 rounded-[6px] bg-accent px-2.5 text-[11px] font-medium text-white transition hover:brightness-110 disabled:opacity-30"
+              className="flex h-[26px] items-center gap-1 rounded-[6px] bg-accent px-2.5 text-[12.5px] font-medium text-white transition hover:brightness-110 disabled:opacity-30"
             >
               Run <ArrowUp size={10} className="rotate-90" />
             </button>
           </div>
         </div>
-        <div className="mt-1.5 flex items-center justify-between px-1 text-[9.5px] text-faint">
+        <div className="mt-1.5 flex items-center justify-between px-1 text-[11.5px] text-faint">
           <span className="flex items-center gap-2">
             <span className="flex items-center gap-1">
               <span className="kbd">↑</span>
@@ -351,10 +351,10 @@ function ConsoleEntry({ entry }: { entry: Entry }) {
   return (
     <div className="group py-2.5">
       <div className="flex items-center gap-2">
-        <span className="mono text-[11px] text-accent">❯</span>
-        <code className="min-w-0 flex-1 break-all mono text-[11.5px] font-medium text-ink">{entry.command}</code>
+        <span className="mono text-[12.5px] text-accent">❯</span>
+        <code className="min-w-0 flex-1 break-all mono text-[12.5px] font-medium text-ink">{entry.command}</code>
         {entry.result ? (
-          <span className="shrink-0 text-[9.5px] tabular-nums text-faint">{entry.result.elapsedMs.toFixed(2)} ms</span>
+          <span className="shrink-0 text-[11.5px] tabular-nums text-faint">{entry.result.elapsedMs.toFixed(2)} ms</span>
         ) : null}
         <button
           onClick={() => void copyResult()}
@@ -365,12 +365,12 @@ function ConsoleEntry({ entry }: { entry: Entry }) {
       </div>
       <div className="ml-[21px] mt-1.5">
         {entry.running ? (
-          <div className="flex items-center gap-2 py-1 text-[10.5px] text-faint">
+          <div className="flex items-center gap-2 py-1 text-[12px] text-faint">
             <span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-amber" />
             等待 Redis 响应…
           </div>
         ) : entry.error ? (
-          <div className="flex items-start gap-2 rounded-[7px] border border-red/20 bg-red/5 px-2.5 py-2 text-[11px] leading-relaxed text-red">
+          <div className="flex items-start gap-2 rounded-[7px] border border-red/20 bg-red/5 px-2.5 py-2 text-[12.5px] leading-relaxed text-red">
             <AlertCircle size={12} className="mt-[2px] shrink-0" />
             <span className="mono whitespace-pre-wrap break-all">{entry.error}</span>
           </div>
@@ -412,7 +412,7 @@ function PairTable({
 }) {
   return (
     <div className="overflow-hidden rounded-[7px] border border-line/70">
-      <div className="grid grid-cols-[34px_1fr_1.2fr] gap-2 border-b border-line/70 bg-panel/60 px-2.5 py-1 text-[9px] font-medium uppercase tracking-wider text-faint">
+      <div className="grid grid-cols-[34px_1fr_1.2fr] gap-2 border-b border-line/70 bg-panel/60 px-2.5 py-1 text-[11.5px] font-medium uppercase tracking-wider text-faint">
         <span>#</span>
         <span>{keyLabel}</span>
         <span>{valueLabel}</span>
@@ -421,11 +421,11 @@ function PairTable({
         <div
           key={index}
           className={cn(
-            'grid grid-cols-[34px_1fr_1.2fr] items-start gap-2 px-2.5 py-[3px] text-[10.5px]',
+            'grid grid-cols-[34px_1fr_1.2fr] items-start gap-2 px-2.5 py-[3px] text-[12px]',
             index % 2 === 0 ? 'bg-app/30' : 'bg-transparent',
           )}
         >
-          <span className="pt-[1px] text-[9px] tabular-nums text-faint">{index + 1}</span>
+          <span className="pt-[1px] text-[11.5px] tabular-nums text-faint">{index + 1}</span>
           <span className="min-w-0 break-all mono text-blue/90">{scalarText(key)}</span>
           <span className="min-w-0 break-all mono text-ink">{scalarText(value)}</span>
         </div>
@@ -437,7 +437,7 @@ function PairTable({
 function InfoBulk({ text }: { text: string }) {
   const lines = text.split('\n')
   return (
-    <div className="mono max-h-[420px] overflow-auto rounded-[7px] border border-line/70 bg-app/60 px-3 py-2 text-[10.5px] leading-[1.7]">
+    <div className="mono max-h-[420px] overflow-auto rounded-[7px] border border-line/70 bg-app/60 px-3 py-2 text-[12px] leading-[1.7]">
       {lines.map((line, index) => {
         const trimmed = line.trim()
         if (!trimmed) return <div key={index} className="h-2" />
@@ -478,19 +478,19 @@ function ValueView({
   command?: string
 }) {
   if (value.kind === 'nil') {
-    return <span className="mono text-[11px] text-faint">(nil)</span>
+    return <span className="mono text-[12.5px] text-faint">(nil)</span>
   }
   if (value.kind === 'int') {
-    return <span className="mono text-[11.5px] tabular-nums text-amber">(integer) {value.value}</span>
+    return <span className="mono text-[12.5px] tabular-nums text-amber">(integer) {value.value}</span>
   }
   if (value.kind === 'double') {
-    return <span className="mono text-[11.5px] text-amber">(double) {value.value}</span>
+    return <span className="mono text-[12.5px] text-amber">(double) {value.value}</span>
   }
   if (value.kind === 'bool') {
-    return <span className="mono text-[11.5px] text-violet">{value.value ? 'true' : 'false'}</span>
+    return <span className="mono text-[12.5px] text-violet">{value.value ? 'true' : 'false'}</span>
   }
   if (value.kind === 'status') {
-    return <span className="mono text-[11.5px] text-green">{value.value}</span>
+    return <span className="mono text-[12.5px] text-green">{value.value}</span>
   }
   if (value.kind === 'bulk') {
     if (command && /^INFO(\s|$)/i.test(command.trim())) {
@@ -499,20 +499,20 @@ function ValueView({
     const json = tryPrettyJson(value.value)
     if (json.ok && value.value.length < 200_000) {
       return (
-        <pre className="mono max-h-[340px] overflow-auto rounded-[7px] border border-line/70 bg-app/60 px-3 py-2 text-[11px] leading-[1.65]">
+        <pre className="mono max-h-[340px] overflow-auto rounded-[7px] border border-line/70 bg-app/60 px-3 py-2 text-[12.5px] leading-[1.65]">
           <code dangerouslySetInnerHTML={{ __html: jsonToHtml(json.text) }} />
         </pre>
       )
     }
     return (
-      <pre className="mono max-h-[340px] overflow-auto whitespace-pre-wrap break-all rounded-[7px] border border-line/70 bg-app/60 px-3 py-2 text-[11px] leading-[1.65] text-ink">
+      <pre className="mono max-h-[340px] overflow-auto whitespace-pre-wrap break-all rounded-[7px] border border-line/70 bg-app/60 px-3 py-2 text-[12.5px] leading-[1.65] text-ink">
         {value.value || <span className="text-faint">(empty)</span>}
       </pre>
     )
   }
   if (value.kind === 'array') {
     if (!value.value.length) {
-      return <span className="mono text-[11px] text-faint">(empty array)</span>
+      return <span className="mono text-[12.5px] text-faint">(empty array)</span>
     }
     const capped = value.value.length > 500
     const items = capped ? value.value.slice(0, 500) : value.value
@@ -547,11 +547,11 @@ function ValueView({
             <div
               key={index}
               className={cn(
-                'flex items-start gap-2 px-2.5 py-1 text-[11px]',
+                'flex items-start gap-2 px-2.5 py-1 text-[12.5px]',
                 index % 2 === 0 ? 'bg-app/40' : 'bg-transparent',
               )}
             >
-              <span className="w-6 shrink-0 text-right text-[9.5px] tabular-nums text-faint">{index + 1}</span>
+              <span className="w-6 shrink-0 text-right text-[11.5px] tabular-nums text-faint">{index + 1}</span>
               <span className="min-w-0 flex-1 break-all mono">
                 {item.kind === 'nil' ? (
                   <span className="text-faint">(nil)</span>
@@ -571,7 +571,7 @@ function ValueView({
           ))}
         </div>
         {capped ? (
-          <p className="pl-2 text-[9.5px] text-amber">
+          <p className="pl-2 text-[11.5px] text-amber">
             结果较大，仅显示前 500 项（共 {value.value.length} 项）
           </p>
         ) : null}
@@ -582,14 +582,14 @@ function ValueView({
       <div className="flex flex-col gap-1.5">
         {items.map((item, index) => (
           <div key={index} className="flex items-start gap-2">
-            <span className="mt-[3px] w-4 shrink-0 text-right text-[9.5px] tabular-nums text-faint">{index + 1}</span>
+            <span className="mt-[3px] w-4 shrink-0 text-right text-[11.5px] tabular-nums text-faint">{index + 1}</span>
             <div className="min-w-0 flex-1">
               <ValueView value={item} depth={depth + 1} />
             </div>
           </div>
         ))}
         {capped ? (
-          <p className="pl-6 text-[9.5px] text-amber">
+          <p className="pl-6 text-[11.5px] text-amber">
             结果较大，仅显示前 500 项（共 {value.value.length} 项）
           </p>
         ) : null}
@@ -597,7 +597,7 @@ function ValueView({
     )
   }
   if (value.kind === 'map') {
-    if (!value.value.length) return <span className="mono text-[11px] text-faint">(empty map)</span>
+    if (!value.value.length) return <span className="mono text-[12.5px] text-faint">(empty map)</span>
     return (
       <div className="overflow-hidden rounded-[7px] border border-line/70">
         {value.value.map(([k, v], index) => (

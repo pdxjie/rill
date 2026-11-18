@@ -178,7 +178,7 @@ export function ConnectionModal() {
           onClose={closeModal}
         >
           <span
-            className="mt-1 rounded-[5px] px-2 py-[2px] text-[9.5px] font-semibold uppercase tracking-[0.06em]"
+            className="mt-1 rounded-[5px] px-2 py-[2px] text-[11.5px] font-semibold uppercase tracking-[0.06em]"
             style={{ background: `${env.color}16`, color: env.color }}
           >
             {env.label}
@@ -195,7 +195,7 @@ export function ConnectionModal() {
               key={item.key}
               onClick={() => setTab(item.key)}
               className={cn(
-                'relative flex h-[36px] items-center gap-1.5 px-3 text-[11.5px] font-medium transition',
+                'relative flex h-[36px] items-center gap-1.5 px-3 text-[12.5px] font-medium transition',
                 tab === item.key ? 'text-ink' : 'text-muted hover:text-ink',
               )}
             >
@@ -302,13 +302,13 @@ export function ConnectionModal() {
                     setClearPassword(true)
                     setPassword('')
                   }}
-                  className="self-start text-[10px] text-faint underline-offset-2 hover:text-red hover:underline"
+                  className="self-start text-[12px] text-faint underline-offset-2 hover:text-red hover:underline"
                 >
                   清除已保存的密码
                 </button>
               ) : null}
               {clearPassword ? (
-                <p className="text-[10px] text-amber">保存后将删除钥匙串中的密码（适用于无密码实例）。</p>
+                <p className="text-[12px] text-amber">保存后将删除钥匙串中的密码（适用于无密码实例）。</p>
               ) : null}
 
               <div className="flex flex-col gap-2">
@@ -327,7 +327,7 @@ export function ConnectionModal() {
                       {draft.color === color ? <Check size={12} className="text-black/70" /> : null}
                     </button>
                   ))}
-                  <span className="ml-1 text-[10px] text-faint">用于侧栏和顶部标识</span>
+                  <span className="ml-1 text-[12px] text-faint">用于侧栏和顶部标识</span>
                 </div>
               </div>
             </div>
@@ -355,7 +355,7 @@ export function ConnectionModal() {
                       description="仅用于自签名证书或经 SSH 隧道转发的 TLS 连接。"
                     />
                     {draft.tlsInsecure ? (
-                      <p className="mt-2 flex items-start gap-1.5 text-[10px] leading-relaxed text-amber">
+                      <p className="mt-2 flex items-start gap-1.5 text-[12px] leading-relaxed text-amber">
                         <AlertTriangle size={11} className="mt-[1px] shrink-0" />
                         跳过校验会失去中间人攻击防护，请确认网络环境可信。
                       </p>
@@ -380,8 +380,8 @@ export function ConnectionModal() {
               <div className="flex items-start gap-2.5 rounded-[10px] border border-line/70 bg-panel/30 p-3">
                 <KeyRound size={14} className="mt-0.5 shrink-0 text-green" />
                 <div>
-                  <p className="text-[11px] font-medium text-ink">密码不会写入配置文件</p>
-                  <p className="mt-0.5 text-[10px] leading-relaxed text-faint">
+                  <p className="text-[12.5px] font-medium text-ink">密码不会写入配置文件</p>
+                  <p className="mt-0.5 text-[12px] leading-relaxed text-faint">
                     密码保存在 macOS 钥匙串（服务名 com.rill.redis.connection.*），配置文件仅记录连接元数据，
                     权限为 600。Rill 不会上传任何连接信息。
                   </p>
@@ -455,7 +455,7 @@ export function ConnectionModal() {
                       className="mono"
                     />
                   </Field>
-                  <div className="rounded-[9px] border border-line/70 bg-panel/30 p-3 text-[10px] leading-relaxed text-faint">
+                  <div className="rounded-[9px] border border-line/70 bg-panel/30 p-3 text-[12px] leading-relaxed text-faint">
                     <p className="flex items-center gap-1.5 font-medium text-muted">
                       <Zap size={10} className="text-amber" /> 连接路径
                     </p>
@@ -473,8 +473,8 @@ export function ConnectionModal() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-[11px] border border-line bg-panel text-faint">
                     <Network size={18} />
                   </div>
-                  <p className="text-[12px] text-muted">直连模式</p>
-                  <p className="max-w-[360px] text-[10px] leading-relaxed text-faint">
+                  <p className="text-[13px] text-muted">直连模式</p>
+                  <p className="max-w-[360px] text-[12px] leading-relaxed text-faint">
                     开启后，Rill 会为这个连接创建临时 SSH 隧道，断开连接时自动关闭。
                   </p>
                 </div>
@@ -485,7 +485,7 @@ export function ConnectionModal() {
           {testResult ? (
             <div
               className={cn(
-                'mt-4 flex items-start gap-2 rounded-[8px] border px-3 py-2 text-[11px]',
+                'mt-4 flex items-start gap-2 rounded-[8px] border px-3 py-2 text-[12.5px]',
                 testResult.ok
                   ? 'border-green/25 bg-green/5 text-green'
                   : 'border-red/25 bg-red/5 text-red',
@@ -495,14 +495,14 @@ export function ConnectionModal() {
               <div className="min-w-0">
                 <span>{testResult.message}</span>
                 {testResult.version ? (
-                  <span className="ml-1 text-[10px] text-muted">Redis {testResult.version}</span>
+                  <span className="ml-1 text-[12px] text-muted">Redis {testResult.version}</span>
                 ) : null}
               </div>
             </div>
           ) : null}
 
           {error ? (
-            <div className="mt-3 flex items-center gap-1.5 text-[11px] text-red">
+            <div className="mt-3 flex items-center gap-1.5 text-[12.5px] text-red">
               <AlertTriangle size={12} /> {error}
             </div>
           ) : null}

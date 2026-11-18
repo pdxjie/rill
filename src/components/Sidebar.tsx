@@ -97,8 +97,8 @@ export function Sidebar() {
         ) : (
           <>
             <div className="flex items-center gap-1.5">
-              <span className="text-[9.5px] font-semibold uppercase tracking-[0.12em] text-faint">连接</span>
-              <span className="rounded-[4px] bg-panel px-1 text-[9px] tabular-nums text-muted">
+              <span className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-faint">连接</span>
+              <span className="rounded-[4px] bg-panel px-1 text-[11.5px] tabular-nums text-muted">
                 {connections.length}
               </span>
             </div>
@@ -120,7 +120,7 @@ export function Sidebar() {
                   <button
                     onClick={() => void selectConnection(conn.id)}
                     className={cn(
-                      'relative flex h-[38px] w-[38px] items-center justify-center rounded-[10px] border text-[12px] font-semibold transition',
+                      'relative flex h-[38px] w-[38px] items-center justify-center rounded-[10px] border text-[13px] font-semibold transition',
                       active
                         ? 'border-accent/40 bg-elevated text-ink'
                         : 'border-transparent bg-panel/60 text-muted hover:bg-panel2',
@@ -169,7 +169,7 @@ export function Sidebar() {
                     />
                   ) : null}
                   <div
-                    className="relative flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-[8px] text-[12px] font-semibold"
+                    className="relative flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-[8px] text-[13px] font-semibold"
                     style={{ background: `${conn.color}18`, color: conn.color }}
                   >
                     {conn.name.slice(0, 1)}
@@ -186,17 +186,17 @@ export function Sidebar() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1">
-                      <span className={cn('truncate text-[12px] font-medium', active ? 'text-ink' : 'text-muted group-hover:text-ink')}>
+                      <span className={cn('truncate text-[13px] font-medium', active ? 'text-ink' : 'text-muted group-hover:text-ink')}>
                         {conn.name}
                       </span>
                       <span
-                        className="shrink-0 rounded-[3px] px-1 text-[7.5px] font-semibold uppercase tracking-[0.08em]"
+                        className="shrink-0 rounded-[3px] px-1 text-[11.5px] font-semibold uppercase tracking-[0.08em]"
                         style={{ background: `${meta.color}14`, color: meta.color }}
                       >
                         {meta.label}
                       </span>
                     </div>
-                    <div className="mt-[1px] flex items-center gap-1 truncate mono text-[9px] text-faint">
+                    <div className="mt-[1px] flex items-center gap-1 truncate mono text-[11.5px] text-faint">
                       <span className="truncate">
                         {conn.host}:{conn.port}
                       </span>
@@ -224,7 +224,7 @@ export function Sidebar() {
             })}
 
         {!connections.length ? (
-          <div className="px-3 py-8 text-center text-[10.5px] leading-relaxed text-faint">
+          <div className="px-3 py-8 text-center text-[12px] leading-relaxed text-faint">
             还没有连接
             <br />
             点击下方按钮添加
@@ -244,12 +244,12 @@ export function Sidebar() {
           <>
             <button
               onClick={() => openModal(null)}
-              className="flex h-[32px] w-full items-center justify-center gap-1.5 rounded-[8px] border border-dashed border-line text-[11px] font-medium text-muted transition hover:border-accent/40 hover:bg-accent/5 hover:text-ink"
+              className="flex h-[32px] w-full items-center justify-center gap-1.5 rounded-[8px] border border-dashed border-line text-[12.5px] font-medium text-muted transition hover:border-accent/40 hover:bg-accent/5 hover:text-ink"
             >
               <Plus size={12} className="text-accent" />
               新建连接
             </button>
-            <div className="mt-2 flex items-center justify-between px-1 text-[9px] text-faint">
+            <div className="mt-2 flex items-center justify-between px-1 text-[11.5px] text-faint">
               <span className="flex items-center gap-1">
                 <span className="h-1 w-1 rounded-full bg-green" />
                 {connectedCount} 已连接 · {connections.length} 个

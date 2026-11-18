@@ -54,7 +54,7 @@ export function Workspace() {
               </div>
               <div>
                 <p className="text-[15px] font-medium text-ink">正在连接 {conn.name}</p>
-                <p className="mt-1 mono text-[11px] text-faint">
+                <p className="mt-1 mono text-[12.5px] text-faint">
                   {conn.host}:{conn.port}
                   {conn.ssh ? ' · 通过 SSH 隧道' : ''}
                 </p>
@@ -100,7 +100,7 @@ export function Workspace() {
               key={item.key}
               onClick={() => setTab(item.key)}
               className={cn(
-                'relative flex h-[34px] items-center gap-1.5 rounded-t-[7px] px-2.5 text-[11.5px] font-medium transition',
+                'relative flex h-[34px] items-center gap-1.5 rounded-t-[7px] px-2.5 text-[12.5px] font-medium transition',
                 active ? 'text-ink' : 'text-muted hover:bg-panel2/50 hover:text-ink',
               )}
             >
@@ -110,7 +110,7 @@ export function Workspace() {
             </button>
           )
         })}
-        <span className="ml-auto hidden items-center gap-1 pb-2 text-[9px] text-faint lg:flex">
+        <span className="ml-auto hidden items-center gap-1 pb-2 text-[11.5px] text-faint lg:flex">
           <span className="kbd">⌘1</span>
           <span className="text-faint/60">–</span>
           <span className="kbd">⌘6</span>
@@ -147,7 +147,7 @@ function ConnectionHeader({ conn }: { conn: ConnectionView }) {
         <div className="flex items-center gap-2">
           <h1 className="truncate text-[14px] font-semibold tracking-[-0.01em] text-ink">{conn.name}</h1>
           <span
-            className="rounded-[4px] px-1.5 py-[1px] text-[8.5px] font-semibold uppercase tracking-[0.06em]"
+            className="rounded-[4px] px-1.5 py-[1px] text-[11.5px] font-semibold uppercase tracking-[0.06em]"
             style={{ background: `${meta.color}16`, color: meta.color }}
           >
             {meta.label}
@@ -158,11 +158,11 @@ function ConnectionHeader({ conn }: { conn: ConnectionView }) {
               <Lock size={8} /> 只读
             </Badge>
           ) : null}
-          <span className="hidden items-center gap-1 text-[9.5px] text-faint xl:flex">
+          <span className="hidden items-center gap-1 text-[11.5px] text-faint xl:flex">
             <span className="h-1 w-1 rounded-full bg-green" /> 已连接
           </span>
         </div>
-        <div className="mt-[2px] flex items-center gap-1.5 mono text-[9.5px] text-faint">
+        <div className="mt-[2px] flex items-center gap-1.5 mono text-[11.5px] text-faint">
           <span className="truncate">
             {conn.host}:{conn.port}
           </span>
@@ -182,7 +182,7 @@ function ConnectionHeader({ conn }: { conn: ConnectionView }) {
         <Tip label="刷新当前视图 ⌘R">
           <button
             onClick={() => window.dispatchEvent(new CustomEvent('rill:refresh'))}
-            className="flex h-[26px] items-center gap-1 rounded-[6px] border border-line bg-panel px-2 text-[10px] text-muted transition hover:text-ink"
+            className="flex h-[26px] items-center gap-1 rounded-[6px] border border-line bg-panel px-2 text-[12px] text-muted transition hover:text-ink"
           >
             <RefreshCw size={10} /> 刷新
           </button>
@@ -191,7 +191,7 @@ function ConnectionHeader({ conn }: { conn: ConnectionView }) {
         <IconButton icon={Pencil} label="编辑连接" onClick={() => openModal(conn.id)} size={14} />
         <button
           onClick={() => void disconnect(conn.id)}
-          className="flex h-[26px] items-center gap-1 rounded-[6px] border border-line bg-panel px-2 text-[10px] text-muted transition hover:border-red/30 hover:bg-red/5 hover:text-red"
+          className="flex h-[26px] items-center gap-1 rounded-[6px] border border-line bg-panel px-2 text-[12px] text-muted transition hover:border-red/30 hover:bg-red/5 hover:text-red"
         >
           <WifiOff size={10} /> 断开
         </button>
@@ -241,18 +241,18 @@ function Welcome() {
                     <div className="flex items-center gap-2">
                       <span className="truncate text-[13px] font-medium text-ink">{conn.name}</span>
                       <span
-                        className="text-[8.5px] font-semibold uppercase tracking-[0.06em]"
+                        className="text-[11.5px] font-semibold uppercase tracking-[0.06em]"
                         style={{ color: meta.color }}
                       >
                         {meta.label}
                       </span>
                       {conn.connected ? (
-                        <span className="flex items-center gap-1 text-[9px] text-green">
+                        <span className="flex items-center gap-1 text-[11.5px] text-green">
                           <span className="h-1 w-1 rounded-full bg-green" /> 已连接
                         </span>
                       ) : null}
                     </div>
-                    <div className="mt-0.5 mono text-[10px] text-faint">
+                    <div className="mt-0.5 mono text-[12px] text-faint">
                       {conn.host}:{conn.port} · db{conn.db} · {conn.lastUsedAt ? timeAgo(conn.lastUsedAt) : '未使用'}
                     </div>
                   </div>
@@ -267,7 +267,7 @@ function Welcome() {
           ) : (
             <div className="rounded-[12px] border border-dashed border-line bg-panel/40 px-6 py-8 text-center">
               <p className="text-[13px] font-medium text-ink">还没有保存连接</p>
-              <p className="mt-1 text-[11px] text-faint">添加第一个 Redis 实例，支持 TLS、SSH 隧道与只读保护。</p>
+              <p className="mt-1 text-[12.5px] text-faint">添加第一个 Redis 实例，支持 TLS、SSH 隧道与只读保护。</p>
               <Button className="mx-auto mt-3" variant="primary" icon={Plus} onClick={() => openModal(null)}>
                 新建连接
               </Button>
@@ -276,14 +276,14 @@ function Welcome() {
           {connections.length ? (
             <button
               onClick={() => openModal(null)}
-              className="mt-1 flex h-[38px] items-center justify-center gap-1.5 rounded-[10px] border border-dashed border-line text-[11px] text-muted transition hover:border-accent/40 hover:bg-accent/5 hover:text-ink"
+              className="mt-1 flex h-[38px] items-center justify-center gap-1.5 rounded-[10px] border border-dashed border-line text-[12.5px] text-muted transition hover:border-accent/40 hover:bg-accent/5 hover:text-ink"
             >
               <Plus size={12} className="text-accent" /> 新建连接
             </button>
           ) : null}
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-5 text-[9.5px] text-faint">
+        <div className="mt-8 flex items-center justify-center gap-5 text-[11.5px] text-faint">
           <span className="flex items-center gap-1">
             <span className="kbd">⌘K</span> 命令面板
           </span>

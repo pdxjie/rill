@@ -1,6 +1,6 @@
 [package]
 name = "rill"
-version = "0.1.8"
+version = "0.1.9"
 description = "Rill — a fast, focused Redis client for macOS"
 authors = ["Rill"]
 license = "Apache-2.0"

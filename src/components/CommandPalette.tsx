@@ -274,7 +274,7 @@ export function CommandPalette() {
         </div>
         <div ref={listRef} className="scroll-area max-h-[52vh] min-h-[120px] py-1.5">
           {selectable.length === 0 ? (
-            <div className="px-4 py-10 text-center text-[11px] text-faint">
+            <div className="px-4 py-10 text-center text-[12.5px] text-faint">
               没有匹配 “{query}” 的结果
             </div>
           ) : (
@@ -283,7 +283,7 @@ export function CommandPalette() {
                 return (
                   <div
                     key={`h-${row.label}-${i}`}
-                    className="px-4 pb-1 pt-2 text-[9px] font-semibold uppercase tracking-[0.1em] text-faint"
+                    className="px-4 pb-1 pt-2 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-faint"
                   >
                     {row.label}
                   </div>
@@ -305,9 +305,9 @@ export function CommandPalette() {
                     )}
                   >
                     <Icon size={13} className={activeRow ? 'text-accent' : 'text-faint'} />
-                    <span className="flex-1 truncate text-[12px]">{row.action.label}</span>
+                    <span className="flex-1 truncate text-[13px]">{row.action.label}</span>
                     {row.action.hint ? (
-                      <span className="truncate mono text-[9.5px] text-faint">{row.action.hint}</span>
+                      <span className="truncate mono text-[11.5px] text-faint">{row.action.hint}</span>
                     ) : null}
                     {row.action.shortcut ? <span className="kbd">{row.action.shortcut}</span> : null}
                   </button>
@@ -326,17 +326,17 @@ export function CommandPalette() {
                   )}
                 >
                   <TypeGlyph type={row.key.keyType} size={18} />
-                  <span className="min-w-0 flex-1 truncate mono text-[11.5px] text-ink">{row.key.key}</span>
-                  <span className="text-[9px] font-medium" style={{ color: meta.color }}>
+                  <span className="min-w-0 flex-1 truncate mono text-[12.5px] text-ink">{row.key.key}</span>
+                  <span className="text-[11.5px] font-medium" style={{ color: meta.color }}>
                     {meta.short}
                   </span>
-                  {row.key.ttl >= 0 ? <span className="text-[9px] text-faint">ttl {row.key.ttl}s</span> : null}
+                  {row.key.ttl >= 0 ? <span className="text-[11.5px] text-faint">ttl {row.key.ttl}s</span> : null}
                 </button>
               )
             })
           )}
         </div>
-        <div className="flex items-center gap-3 border-t border-line/70 px-4 py-2 text-[9.5px] text-faint">
+        <div className="flex items-center gap-3 border-t border-line/70 px-4 py-2 text-[11.5px] text-faint">
           <span className="flex items-center gap-1">
             <span className="kbd">↑</span>
             <span className="kbd">↓</span> 选择

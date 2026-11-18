@@ -370,7 +370,7 @@ export function KeysView() {
                 }}
                 placeholder="模糊筛选 Key，支持 * 通配"
                 spellCheck={false}
-                className="field h-[30px] pl-7 pr-10 mono text-[11.5px]"
+                className="field h-[30px] pl-7 pr-10 mono text-[12.5px]"
               />
               <div className="absolute right-1.5 top-1/2 flex -translate-y-1/2 items-center gap-0.5">
                 {loading && keys.length > 0 ? <Spinner size={10} className="text-faint" /> : null}
@@ -402,7 +402,7 @@ export function KeysView() {
               <select
                 value={typeFilter}
                 onChange={(event) => setTypeFilter(event.target.value)}
-                className="h-[24px] w-[92px] appearance-none rounded-[6px] border border-line bg-panel pl-2 pr-5 text-[10.5px] leading-none text-muted outline-none transition hover:text-ink"
+                className="h-[24px] w-[92px] appearance-none rounded-[6px] border border-line bg-panel pl-2 pr-5 text-[12px] leading-none text-muted outline-none transition hover:text-ink"
               >
                 {TYPE_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -501,8 +501,8 @@ export function KeysView() {
           ) : loading && keys.length > 0 && displayKeys.length === 0 ? (
             <div className="flex flex-col items-center gap-2 px-4 py-10 text-center">
               <Spinner size={16} className="text-accent" />
-              <p className="text-[11px] text-muted">正在全库扫描匹配的 Key…</p>
-              <p className="text-[9.5px] text-faint">SCAN 会分批返回，稍等片刻</p>
+              <p className="text-[12.5px] text-muted">正在全库扫描匹配的 Key…</p>
+              <p className="text-[11.5px] text-faint">SCAN 会分批返回，稍等片刻</p>
             </div>
           ) : displayKeys.length === 0 ? (
             <EmptyState
@@ -569,7 +569,7 @@ export function KeysView() {
                       {active ? <span className="absolute inset-y-1.5 left-0 w-[2px] rounded-r bg-accent" /> : null}
                       <TypeGlyph type={item.keyType} size={20} />
                       <div className="min-w-0 flex-1">
-                        <div className="truncate mono text-[11.5px] leading-[15px] text-ink" title={item.key}>
+                        <div className="truncate mono text-[12.5px] leading-[15px] text-ink" title={item.key}>
                           {highlightParts(item.key, patternInput || pattern).map((part, i) =>
                             part.hit ? (
                               <span key={i} className="rounded-[2px] bg-accent/15 text-accent">
@@ -580,7 +580,7 @@ export function KeysView() {
                             ),
                           )}
                         </div>
-                        <div className="mt-[2px] flex items-center gap-1.5 text-[9.5px] leading-[12px] text-faint">
+                        <div className="mt-[2px] flex items-center gap-1.5 text-[11.5px] leading-[12px] text-faint">
                           <span className={cn(item.ttl >= 0 && item.ttl < 300 && 'text-amber/90')}>
                             {formatTtl(item.ttl)}
                           </span>
@@ -600,7 +600,7 @@ export function KeysView() {
           )}
         </div>
 
-        <div className="flex h-[30px] shrink-0 items-center justify-between border-t border-line/70 bg-panel/40 px-3 text-[10px] text-faint">
+        <div className="flex h-[30px] shrink-0 items-center justify-between border-t border-line/70 bg-panel/40 px-3 text-[12px] text-faint">
           {mode === 'tree' ? (
             <>
               <span className="flex items-center gap-1.5">
@@ -748,7 +748,7 @@ function CreateKeyModal({
               }
             }}
           />
-          <span className="text-[10px] text-faint">建议使用冒号分隔命名空间，键空间视图会自动聚合。</span>
+          <span className="text-[12px] text-faint">建议使用冒号分隔命名空间，键空间视图会自动聚合。</span>
         </div>
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-medium text-muted">数据类型</label>
